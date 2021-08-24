@@ -14,11 +14,12 @@ Features:
 * A system of TDummys allow setting boat's *course*, *heel* and *sail rotation* for main and jib sails. 
 * A rock with a lighthouse (but no collision detection yet).
 * A few floating objects. 
-* As the boat moves, it leaves a trail of floating bubbles. Bubbles are recicled after a while.  
-* Boat automaticaly makes U turn when leaving the 30x30 sandbox.
+* As the boat moves, it leaves a trail of floating bubbles. Bubbles are recycled over time.  
+* Only one small sea surface sandbox. Boat automaticaly makes U turn when leaving the 30x30 mesh.
+* Large textured TDisk represents the sea horizon.
 * Scrollable listbox contains the app control: camera, boat, waves and object positioning. 
 * Camera controls: AngleOfView or switch to design camera.
-* Boat controls: sea movement, Course, Speed, Heel, jib sheet and main sheet.
+* Boat controls: movement, Course, Speed, Heel, jib and main sheet.
 * 3 waves w/ configurable params: Amplitude, Longueur, Vitesse and Origine.
 * All assets (3d model and textures) are embedded in the form file (fSailboatDemo.fmx). This is why it is so big.
 
