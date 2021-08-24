@@ -9,9 +9,13 @@ Original repository is at https://github.com/gbegreg/GBE3D
 
 I added components *TWaveSystem*, *TOceanSurface* and *TomSailSurface*. 
 
-I moved the wave definitions to TWaveSystem, a non-visual component. It supports 3 simultaneous sin waves. TOceanSurface has a WaveSystem field, so that multiple TOceanSurfaces can share the same TWaveSystem. 
+I moved the wave definitions to *TWaveSystem*, a non-visual component. It supports 3 simultaneous sin waves. 
 
-TomSailSurface is a basic sail mesh object, for main and jib sails. It supports sails with a straight leech and simetric sails, like spinaker.
+*TOceanSurface* is a dynamic rectangular 3d mesh object. 
+It has a WaveSystem field, so that multiple TOceanSurfaces can share the same TWaveSystem. 
+TOceanSurface initially descended from TGBEPlaneExtend, but I changed to TPlane to be able to separate the wave system.
+
+*TomSailSurface* is a basic 3d sail mesh object, for main and jib sails. It supports sails with a straight leech and simetric sails, like spinaker.*
 
 I also added the sample *SailboatDemo*:
 
