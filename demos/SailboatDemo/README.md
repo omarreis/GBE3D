@@ -3,6 +3,7 @@
 ![app screenshot1](Screenshot1.png)
 
 This demo application was added to this fork of GBE3D, by Gregory Bersegeay. 
+It is a Delphi Firemonkey 3D application. 
 
 Features:
 * Sailboatdemo is based on original GBE3D sample *waterdemo*.
