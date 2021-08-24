@@ -7,7 +7,11 @@ In this fork of Firemonkey 3D component suite *GBE3D* by Gregory Bersegeay, I tr
 
 Original repository is at https://github.com/gbegreg/GBE3D
 
-I addded components *TWaveSystem*, *TOceanSurface* and *TomSailSurface*. I moved the wave definitions to TWaveSystem. It supports 3 waves.  TOceanSurface has a TWaveSystem field. I did that, so multiple TOceanSurfaces can use the same wave system. TomSailSurface is a basic sail mesh ( for main and jib sails). 
+I addded components *TWaveSystem*, *TOceanSurface* and *TomSailSurface*. 
+
+I moved the wave definitions to TWaveSystem, a non-visual component. It supports 3 simultaneous sin waves. TOceanSurface has a WaveSystem field, so that multiple TOceanSurfaces can share the same TWaveSystem. 
+
+TomSailSurface is a basic sail mesh object, for main and jib sails. It supports sails with a straight leech and simetric sails, like spinaker.
 
 I also added the sample https://github.com/omarreis/GBE3D/tree/master/demos/SailboatDemo which includes a racing sailboat model and some textures.
 
