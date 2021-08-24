@@ -6,7 +6,8 @@ This demo application was added to this fork of GBE3D, by Gregory Bersegeay.
 
 Features:
 * Sailboatdemo is based on original GBE3D sample *waterdemo*.
-* Sailboat hull 3D model, made with Blender.
+* Multi platform: Windows, iOS and Android.
+* racer boat hull 3D model made with Blender ( embedded )
 * Main and jib sails with camber and quadratic leech. Configurable and dynamic sail mesh.
 * Ocean surface moves and the boats stays in the center, with configurable course and speed. 
 * Boat floats on waves and changes pitch to match the surface.
@@ -30,6 +31,5 @@ as I have added a few components.
 http://www.youtube.com/watch?v=bBpZxB8GLpg   SailboatDemo on Youtube
 
 ![Youtube video](https://img.youtube.com/vi/bBpZxB8GLpg/0.jpg) 
-
 
 ![app screenshot2](Screenshot2.png)
