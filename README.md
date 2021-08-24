@@ -7,7 +7,7 @@ In this fork of Firemonkey 3D component suite *GBE3D* by Gregory Bersegeay, I tr
 
 Original repository is at https://github.com/gbegreg/GBE3D
 
-I addded components *TWaveSystem*, *TOceanSurface* and *TomSailSurface*. 
+I added components *TWaveSystem*, *TOceanSurface* and *TomSailSurface*. 
 
 I moved the wave definitions to TWaveSystem, a non-visual component. It supports 3 simultaneous sin waves. TOceanSurface has a WaveSystem field, so that multiple TOceanSurfaces can share the same TWaveSystem. 
 
