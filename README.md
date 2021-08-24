@@ -17,9 +17,9 @@ I also added the sample *SailboatDemo*:
 
 https://github.com/omarreis/GBE3D/tree/master/demos/SailboatDemo 
 
-Thanks Gregory for the excelent set of 3d components !
+Thanks Gregory for the excelent 3d components !
 
-[SailboatDemo screenshot!](Screenshot2.png)
+![SailboatDemo screenshot](Screenshot2.png)
 
 # GBE3D
 Cette suite de composants 3D pour Delphi est en cours de développement. De nombreux composants seront ajoutés au fil du temps.
