@@ -2,7 +2,7 @@
 # GBE3D
 Suite de composants 3D pour Delphi Firemonkey
 
-# In this fork by oMAR
+## In this fork by oMAR
 In this fork of Firemonkey 3D component suite *GBE3D* by Gregory Bersegeay, I tried to extend some of the components to enable my SailboatDemo ( a sailboat model with adjustable sails, a wave system and a sea surface with floating stuff.
 
 Original repository is at https://github.com/gbegreg/GBE3D
