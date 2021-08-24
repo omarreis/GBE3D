@@ -2,24 +2,24 @@
 
 ![app screenshot1](Screenshot1.png)
 
-This demo application was added to this fork of GBE3D, by Gregory Bersegeay. 
+A 3D sailboat on a moving sea surface with waves and all. 
+This demo application was added to this fork of GBE3D 3d components, by Gregory Bersegeay. 
 It is a Delphi Firemonkey 3D application. 
 
 Features:
-* Sailboatdemo is based on original GBE3D sample *waterdemo*.
-* Multi platform: Windows, iOS and Android.
-* racer boat hull 3D model made with Blender ( embedded )
+* SailboatDemo is based on original GBE3D *waterdemo* sample.
+* Multi platform ( Windows, iOS and Android ).
+* racer boat hull model made with Blender ( embedded )
 * Main and jib sails with camber and quadratic leech. Configurable and dynamic sail mesh.
-* Ocean surface moves and the boats stays in the center, with configurable course and speed. 
-* Boat floats on waves and changes pitch to match the surface.
+* Ocean surface moves and the boats stays in the center. 
+* Boat floats on sea waves and changes pitch to match the surface (directional derivative).
 * Objects parented to the OceanSurface float on it (like the boat wake bubbles).
-* A system of TDummys allow setting boat's *course*, *heel* and *sail rotation* for main and jib sails. 
-* A rock with a lighthouse (but no collision detection yet).
-* A few floating objects. 
-* As the boat moves, it leaves a trail of floating bubbles. Bubbles are recycled over time.  
-* Only one small sea surface sandbox. Boat automaticaly makes U turn when leaving the 30x30 mesh.
+* A system of TDummys allow setting boat's *course*, *heel* and *sail rotation*
+* Rock with a lighthouse (but no collision detection yet). Few floating objects. 
+* As the boat moves, it leaves a wake f floating bubbles. Bubbles are recycled over time.  
+* Only one small rectangle of sea surface. Boat automaticaly makes U turn when leaving the 30x30 mesh sandbox.
 * Large textured TDisk represents the sea horizon.
-* Scrollable listbox contains the app control: camera, boat, waves and object positioning. 
+* Scrollable listbox contains the app controls: camera, boat, waves and object positioning groups. 
 * Camera controls: AngleOfView or switch to design camera.
 * Boat controls: movement, Course, Speed, Heel, jib and main sheet.
 * 3 waves w/ configurable params: Amplitude, Longueur, Vitesse and Origine.
