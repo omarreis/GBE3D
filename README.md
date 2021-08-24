@@ -9,7 +9,7 @@ Original repository is at https://github.com/gbegreg/GBE3D
 
 I addded components *TWaveSystem*, *TOceanSurface* and *TomSailSurface*. I moved the wave definitions to TWaveSystem. It supports 3 waves.  TOceanSurface has a TWaveSystem field. I did that, so multiple TOceanSurfaces can use the same wave system. TomSailSurface is a basic sail mesh ( for main and jib sails). 
 
-I also added the sampl https://github.com/GBE3D/demos/SailboatDemo, which includes a racing boat model and some textures.
+I also added the sample https://github.com/omarreis/GBE3D/tree/master/demos/SailboatDemo which includes a racing sailboat model and some textures.
 
 Thanks Gregory for the excelent set of 3d components !
 
