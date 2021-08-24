@@ -2,20 +2,22 @@
 
 ![app screenshot1](Screenshot1.png)
 
-This demo was added to the fork of GBE3D, by Gregory Bersegeay. 
+This demo application was added to this fork of GBE3D, by Gregory Bersegeay. 
+
 Features:
-* Sailboatdemo is based on original  sample *waterdemo*.
-* All assets (3d model and textures) are embedded in the form file (fSailboatDemo.fmx)
+* Sailboatdemo is based on original GBE3D sample *waterdemo*.
 * Sailboat 3D model, made with Blender.
-* Ocean surface moves as the boat sails (the boats stays in the center). 
+* Main and jib sails with camber and quadratic leech. Configurable and dynamic sail mesh.
+* Ocean surface moves and the boats stays in the center, with configurable course and speed, and boat heel. 
 * Boat floats and changes pitch with the waves.
-* Objects parented to the ocean surface float on it.
-* A system of TDummys allow setting boat's *course*, *heel* and *sail sheets* (main and jib) 
+* Objects parented to the ocean surface float on it (like the boat wake).
+* A system of TDummys allow setting boat's *course*, *heel* and *sail rotation* (main and jib) 
 * A rock with a lighthouse.
-* A couple floating objects
+* A couple floating objects. 
 * As the boat moves, it leaves a trail of floating bubbles. Bubbles are recicled after a while.  
-* Added a scrollable listbox to contain the controls.
-* Camera controls ( AngleOfView and design camera)
+* Added a scrollable listbox to contain the app controls.
+* Camera controls ( AngleOfView or switch to design camera)
+* All assets (3d model and textures) are embedded in the form file (fSailboatDemo.fmx). This is why it is so big.
 
 In order to compile this demo, you have to compile and install the GBE3D design package in this fork,
 as I have added a few components.
