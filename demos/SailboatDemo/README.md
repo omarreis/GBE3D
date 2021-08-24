@@ -1,5 +1,7 @@
 # SailboatDemo
 
+![app screenshot1](Screenshot1.png)
+
 This demo was added to the fork of GBE3D, by Gregory Bersegeay. 
 Features:
 * Sailboatdemo is based on original  sample *waterdemo*.
@@ -18,3 +20,4 @@ Features:
 In order to compile this demo, you have to compile and install the GBE3D design package in this fork,
 as I have added a few components.
 
+![app screenshot2](Screenshot2.png)
