@@ -1,33 +1,41 @@
-unit GBEPlaneExtend;
+unit GBEPlaneExtend;  // Om: GBEPlaneExtend implements a rectangular mesh with oe source of sin wave
+
+
+// Om: added comments to help understanding Gregory's code
 
 interface
-
 uses
   System.SysUtils, System.Classes, FMX.Types, FMX.Controls3D, FMX.Objects3D, System.Math.Vectors, FMX.Types3D, generics.Collections,
   System.Threading, FMX.MaterialSources;
 
 type
-  TWaveRec = record
-    P, D : TPoint3D;
+  TWaveRec = record    // calculates sin() wave amplitude at a given P (x,y)
+    P,                 // wave origin
+    D : TPoint3D;      // wave params D = Point3D( MaxAmplitude, WaveLenght, WaveSpeed )
     function Wave(aSum, aX, aY, aT : single):Single;
+    function calcWaveAmplitudeAndPitch(aCap, aX, aY, aT : single; var aSumAmplitude,aSumDerivative:Single):boolean;
   end;
 
-  TGBEPlaneExtend = class(TPlane)
+  TGBEPlaneExtend = class( TPlane )
   private
-    fTime, fAmplitude, fLongueur, fVitesse : single;
-    fOrigine, fCenter : TPoint3D;
-    fNbMesh : integer;
+    fAmplitude, fLongueur, fVitesse : single;   //wave 1
+    fOrigine: TPoint3D;
+    { Déclarations privées }
+    procedure CalcWaves(D : TPoint3D);    // D = Point3D(fAmplitude, fLongueur, fVitesse)
+  protected
+    fTime:Single;                          //Om: movd stuff to protected
+    fNbMesh : integer;                     // number of tiles in the mesh
     fActiveWaves, fShowlines, fUseTasks : boolean;
     fMaterialLignes: TColorMaterialSource;
-    { Déclarations privées }
-    procedure CalcWaves(D : TPoint3D);
-  protected
+    fCenter : TPoint3D;
     { Déclarations protégées }
   public
     { Déclarations publiques }
     constructor Create(AOwner: TComponent); override;
-    destructor Destroy; override;
-    procedure Render; override;
+    destructor  Destroy; override;
+    procedure   Render; override;
+    // Property    Data;  //om: publica
+    function    Altura(P:TPoint3d):Single; //Om: calc wave amplitude on a point
   published
     { Déclarations publiées }
     property ActiveWaves : boolean read fActiveWaves write fActiveWaves;
@@ -49,56 +57,132 @@ begin
   RegisterComponents('GBE3D', [TGBEPlaneExtend]);
 end;
 
+{ TWaveRec }
 
-function TWaveRec.Wave(aSum, aX, aY, aT: single): Single;
-var l : single;
+// wave world is x,y .  z is the wave height ( amplitude )
+//                   /y
+//        +---------/---------+
+//       / ^    ^  /  ^   ^  /
+//      /---------+---------+----x
+//     /    ^    /    ^    /
+//    +---------/---------+
+//
+
+function TWaveRec.Wave(aSum, aX, aY, aT: single): Single; // sums. Here aX,aY are in div units ( not m )
+var L,Ph:single;
 begin
-  l := P.Distance(Point3d(aX,aY,0));
-  Result:=aSum;
-  if D.Y > 0  then Result:=Result + D.x * sin (1/D.y*l-D.z*at) * 0.001;
+  L := P.Distance( Point3d(aX,aY,0) );     // L= dist to sin wave origin
+  Result := aSum;                         // start w/ previous sum, so we add wave amplitudes of different waves
+  // D.x = MaxAmplitude in div ?
+  // D.y = WaveLenght   in div
+  // D.z = WaveSpeed    in div/s
+  if (D.Y>0)  then            // ignore if wave length <= 0
+    begin
+      Ph := L/D.y - D.z*aT;   // calc wave phase at the point
+      Result := Result + D.x * sin(Ph) * 0.001;    // add sin() wave amplitude / 1000    ( result inside +- MaxAmplitude*0.001 )
+    end;
 end;
 
-procedure TGBEPlaneExtend.CalcWaves(D : TPoint3D);
+// Wave world is in x,y        z is the wave height ( amplitude )
+function TWaveRec.calcWaveAmplitudeAndPitch(aCap, aX, aY, aT : single; var aSumAmplitude,aSumDerivative:Single):boolean;
+var L,L1,Ph,Ph1,aAng,aAmp,aAmp1,aDeriv,DzaT:single; P0,P1:TPoint3D;
+begin
+  Result := false;
+  P0 := Point3d(aX,aY,0);
+  L  := P.Distance( P0 );  // L= dist to sin wave origin P
+
+  if (D.Y>0)  then            // ignore if wave length <= 0
+    begin
+      Result := true;
+      DzaT   := D.z*aT;               // memoise speed*DT
+      Ph     := L/D.y - DzaT;        // calc wave phase at the point
+      aAmp   := D.x * sin(Ph) * 0.001;  // add sin() wave amplitude / 1000    ( result inside +- MaxAmplitude*0.001 )
+      P0.z   := aAmp;
+      // calc directional derivative
+      aAng  := -aCap*Pi/180;       // cap to radians
+      P1    := P0 + Point3d(sin(aAng), cos(aAng), 0);  // move 1.0 unit in cap direction
+      L1    := P.Distance( P1 );  //calc amplitude for new pt
+      Ph1   := L1/D.y - DzaT;
+      aAmp1 := D.x * sin(Ph1) * 0.001;  // add sin() wave amplitude / 1000    ( result inside +- MaxAmplitude*0.001 )
+      P1.z  := aAmp1;
+      aDeriv := aAmp1-aAmp;  // directions derivative calculated at a point 1m away, in cap direction
+      // add amplitude to sum
+
+      aSumAmplitude  := aSumAmplitude  + aAmp;
+      aSumDerivative := aSumDerivative + aDeriv;
+    end;
+end;
+
+{ TGBEPlaneExtend }
+
+procedure TGBEPlaneExtend.CalcWaves(D : TPoint3D);    // D = Point3D(Amplitude, Longueur, Vitesse)
 var
   M:TMeshData;
   x,y : integer;
   somme: single;
   front, back : PPoint3D;
   waveRec : TWaveRec;
-begin
-  M:=self.Data;
 
-  waveRec.P := Point3d(SubdivisionsWidth, SubdivisionsHeight, 0) * 0.5 + fOrigine * fCenter;
+begin
+  M := self.Data;
+  // init waveRec
+
+  waveRec.P := Point3d( SubdivisionsWidth, SubdivisionsHeight, 0)*0.5 + fOrigine*fCenter;
   waveRec.D := D;
 
-  for y := 0 to SubdivisionsHeight do
-     for x := 0 to SubdivisionsWidth do
+  for y := 0 to SubdivisionsHeight do       // 0..30   ( 30 divisions )
+    for x := 0 to SubdivisionsWidth do
        begin
          front := M.VertexBuffer.VerticesPtr[X + (Y * (SubdivisionsWidth+1))];
-         back := M.VertexBuffer.VerticesPtr[fNbMesh + X + (Y * (SubdivisionsWidth+1))];
+         back  := M.VertexBuffer.VerticesPtr[fNbMesh + X + (Y * (SubdivisionsWidth+1))];
          somme := 0;
          somme := waveRec.Wave(somme, x, y, fTime);
          somme := somme * 100;
          Front^.Z := somme;
-         Back^.Z := somme;
+         Back^.Z  := somme;
        end;
+
   M.CalcTangentBinormals;
-  fTime := fTime + 0.01;
+
+  fTime := fTime + 0.01;    // adv wave time by 0.01 seg. Should be 0.2s ? ( the animation speed )
+end;
+
+function TGBEPlaneExtend.Altura(P:TPoint3d):Single; //Om:
+var
+  M:TMeshData;
+  x,y : integer;
+  front, back : PPoint3D;
+begin
+  M := self.Data;
+  x := Round( P.x );
+  y := Round( P.y );
+  if (x>=0) and (x<SubdivisionsWidth) and (y>0) and (y<SubdivisionsHeight) then
+    begin
+      front := M.VertexBuffer.VerticesPtr[X + (Y * (SubdivisionsWidth+1))];
+      back  := M.VertexBuffer.VerticesPtr[fNbMesh + X + (Y * (SubdivisionsWidth+1))];
+
+      Result := (front^.Z+back^.Z)/2; //??
+    end
+    else Result := 0;
 end;
 
 constructor TGBEPlaneExtend.Create(AOwner: TComponent);
 begin
   inherited;
-  fTime := 0;
-  fAmplitude := 1;
-  fLongueur := 1;
-  fVitesse := 5;
-  self.SubdivisionsHeight := 30;
-  self.SubdivisionsWidth := 30;
-  fOrigine := Point3D(self.SubdivisionsWidth / self.Width, self.SubdivisionsHeight / self.Height, 2);
-  fNbMesh:=(SubdivisionsWidth + 1) * (SubdivisionsHeight + 1);
-  fCenter := Point3D(SubdivisionsWidth / self.Width, SubdivisionsHeight / self.Height, 0);
-  fUseTasks := true;
+  fTime := 0;         // wave time
+
+  fAmplitude := 1;    // wave params
+  fLongueur  := 1;    // Om: only 1 ?
+  fVitesse   := 5;    //
+
+  self.SubdivisionsHeight := 30;     // plane subdivisions
+  self.SubdivisionsWidth  := 30;
+
+  fOrigine  := Point3D(self.SubdivisionsWidth / self.Width, self.SubdivisionsHeight / self.Height, 2);
+  fNbMesh   := (SubdivisionsWidth + 1) * (SubdivisionsHeight + 1);
+  // fCenter = SubD / width  ( unit div/m  )
+  fCenter   := Point3D( SubdivisionsWidth / self.Width, SubdivisionsHeight / self.Height, 0);
+  fUseTasks := true;     //default= using tasks
 end;
 
 destructor TGBEPlaneExtend.Destroy;
@@ -107,24 +191,29 @@ begin
 end;
 
 procedure TGBEPlaneExtend.Render;
+var W1:TPoint3D;
+
 begin
   inherited;
   if fActiveWaves then
-  begin
-    if fUseTasks then
     begin
-      TTask.Create( procedure
-                begin
-                  CalcWaves(Point3D(fAmplitude, fLongueur, fVitesse));
-                end).start;
-    end
-    else
-    begin
-      CalcWaves(Point3D(fAmplitude, fLongueur, fVitesse));
+      W1 := Point3D(fAmplitude, fLongueur, fVitesse);
+      if fUseTasks then
+        begin
+          TTask.Create( procedure
+                        begin
+                          CalcWaves(W1);   // recalc mesh
+                        end).start;
+        end
+        else begin
+          CalcWaves(W1);
+        end;
+
     end;
-  end;
+
   if ShowLines then
-    Context.DrawLines(self.Data.VertexBuffer, self.Data.IndexBuffer, TMaterialSource.ValidMaterial(fMaterialLignes),1);
+    Context.DrawLines(self.Data.VertexBuffer, self.Data.IndexBuffer, TMaterialSource.ValidMaterial(fMaterialLignes), 1);
 end;
+
 
 end.

@@ -50,6 +50,10 @@ contains
   uGBEOptionsUtils in 'uGBEOptionsUtils.pas',
   uGBESound in 'uGBESound.pas',
   uGBEPathFinder in 'uGBEPathFinder.pas',
+
+  GBE_Om_OceanWaves in 'GBE_Om_OceanWaves.pas',   // Om: added a two wave system
+  omSailSurface in 'omSailSurface.pas',           // Om: animated sail
+
   GBETimeLine in 'GBETimeLine.pas';
 
 end.
