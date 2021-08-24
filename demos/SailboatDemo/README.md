@@ -23,7 +23,7 @@ Features:
 * Camera controls: AngleOfView or switch to design camera.
 * Boat controls: movement, Course, Speed, Heel, jib and main sheet.
 * 3 waves w/ configurable params: Amplitude, Longueur, Vitesse and Origine.
-* All assets (3d model and textures) are embedded in the form file (fSailboatDemo.fmx). This is why it is so big.
+* All assets (3d model and textures) are embedded in the form file (fSailboatDemo.fmx). That is why it is so big.
 
 In order to compile this demo, you have to compile and install the GBE3D design package in this fork,
 as I have added a few components.
