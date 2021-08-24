@@ -1,6 +1,19 @@
+
 # GBE3D
 Suite de composants 3D pour Delphi Firemonkey
 
+# In this fork by oMAR
+In this fork of Firemonkey 3D component suite *GBE3D* by Gregory Bersegeay, I tried to extend some of the components to enable my SailboatDemo ( a sailboat model with adjustable sails, a wave system and a sea surface with floating stuff.
+
+Original repository is at https://github.com/gbegreg/GBE3D
+
+I addded components *TWaveSystem*, *TOceanSurface* and *TomSailSurface*. I moved the wave definitions to TWaveSystem. It supports 3 waves.  TOceanSurface has a TWaveSystem field. I did that, so multiple TOceanSurfaces can use the same wave system. TomSailSurface is a basic sail mesh ( for main and jib sails). 
+
+I also added the sampl https://github.com/GBE3D/demos/SailboatDemo, which includes a racing boat model and some textures.
+
+Thanks Gregory for the excelent set of 3d components !
+
+# GBE3D
 Cette suite de composants 3D pour Delphi est en cours de développement. De nombreux composants seront ajoutés au fil du temps.
 Cette suite de composants est disponible pour toutes les éditions de Delphi dont la community (qui est gratuite) et fonctionne
 pour toutes les plateformes cibles de Delphi (Windows, Mac OS, Linux, Android et IOS).
