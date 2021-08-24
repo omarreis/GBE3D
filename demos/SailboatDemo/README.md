@@ -2,9 +2,9 @@
 
 This demo was added to the fork of GBE3D, by Gregory Bersegeay. 
 Features:
-* Sailboatdemo is based onoriginal  sample *waterdemo*.
+* Sailboatdemo is based on original  sample *waterdemo*.
 * All assets (3d model and textures) are embedded in the form file (fSailboatDemo.fmx)
-* Sailboat model, made with Blender.
+* Sailboat 3D model, made with Blender.
 * Ocean surface moves as the boat sails (the boats stays in the center). 
 * Boat floats and changes pitch with the waves.
 * Objects parented to the ocean surface float on it.
