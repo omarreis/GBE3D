@@ -13,9 +13,13 @@ I moved the wave definitions to TWaveSystem, a non-visual component. It supports
 
 TomSailSurface is a basic sail mesh object, for main and jib sails. It supports sails with a straight leech and simetric sails, like spinaker.
 
-I also added the sample https://github.com/omarreis/GBE3D/tree/master/demos/SailboatDemo which includes a racing sailboat model and some textures.
+I also added the sample *SailboatDemo*:
+
+https://github.com/omarreis/GBE3D/tree/master/demos/SailboatDemo 
 
 Thanks Gregory for the excelent set of 3d components !
+
+[SailboatDemo creenshot](Screenshot2.png)
 
 # GBE3D
 Cette suite de composants 3D pour Delphi est en cours de développement. De nombreux composants seront ajoutés au fil du temps.
