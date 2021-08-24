@@ -24,6 +24,6 @@ as I have added a few components.
 
 ## Video
 
-[![Youtube video(http://img.youtube.com/vi/bBpZxB8GLpg/0.jpg)](http://www.youtube.com/watch?v=bBpZxB8GLpg "SailboatDemo")
+![Youtube video(http://img.youtube.com/vi/bBpZxB8GLpg/0.jpg)](http://www.youtube.com/watch?v=bBpZxB8GLpg "SailboatDemo")
 
 ![app screenshot2](Screenshot2.png)
