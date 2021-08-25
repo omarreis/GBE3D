@@ -21,8 +21,6 @@ I also added the sample *SailboatDemo*:
 
 https://github.com/omarreis/GBE3D/tree/master/demos/SailboatDemo 
 
-Thanks Gregory for the excelent 3d components !
-
 ![SailboatDemo screenshot](Screenshot2.png)
 
 # GBE3D
