@@ -28,6 +28,9 @@ Features:
 In order to compile this demo, you have to compile and install the GBE3D design package in this fork,
 as I have added a few components.
 
+## Windows executable
+https://github.com/omarreis/GBE3D/releases/tag/V10
+
 ## Video
 http://www.youtube.com/watch?v=bBpZxB8GLpg   SailboatDemo on Youtube
 
