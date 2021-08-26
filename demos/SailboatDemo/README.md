@@ -13,9 +13,9 @@ Features:
 * Main and jib sails with camber and quadratic leech. Configurable and dynamic sail mesh.
 * Ocean surface w/ waves. 
 * Boat stays in the center at 0,0 while the sea surface and land are moved (boatcentric universe)   
-* Boat floats on sea waves and pitches to match sea surface directional derivative ( in Cap direction )
+* Boat floats on waves and pitches to match wave inclination in Course direction.
 * Objects parented to the OceanSurface float on it (like the boat wake bubbles).
-* A system of TDummys allows setting boat's *course*, *heel* and *pitch* independently, avoiding gymbal locks by manipulating RotationAngles.
+* A system of TDummys allows setting boat's *course*, *heel* and *pitch* independently, avoiding gymbal locks by manipulating RotationAngles (Euler angles).
 * A rock with a lighthouse (but no collision detection yet). A few floating objects. 
 * As the boat moves, it leaves a wake of floating bubbles. Bubbles are recycled over time.  
 * One rectangle of sea surface (30x30). Boat automaticaly makes U turn when leaves the sandbox. Todo: a system of tiles.
