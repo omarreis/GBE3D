@@ -9,22 +9,27 @@ Original repository is at https://github.com/gbegreg/GBE3D
 
 I added components *TWaveSystem*, *TOceanSurface* and *TomSailSurface*. 
 
-
-I moved the wave definitions to *TWaveSystem*, a non-visual component. It supports 3 simultaneous sin waves. 
+I moved the wave definitions to *TWaveSystem*, a non-visual component. 
+TWaveSystem supports 3 simultaneous sin waves. 
+Each wave has properties Amplitude, Vitesse, Longeur and Origine. 
 
 *TOceanSurface* is a dynamic rectangular 3d mesh object. 
 It has a WaveSystem field, so that multiple TOceanSurfaces can share the same TWaveSystem. 
-TOceanSurface initially descended from TGBEPlaneExtend, but I changed to TPlane to be able to separate the wave system.
+TOceanSurface initially descended from TGBEPlaneExtend, but I changed to TPlane to be able to separate the wave system,
+reproducing the code for TGBEPlaneExtend.
 
-*TomSailSurface* is a basic 3d sail mesh object, for main and jib sails. It supports sails with a straight leech and simetric sails, like spinaker.
+*TomSailSurface* is a basic 3d sail mesh object for main and jib sails. 
+It supports sails with a straight side (main,jib,genoa) and simetric sails (spinaker, code 0).
 
-Some edits to file GBEPlaneExtend.pas.  Added components in files omSailSurface.pas and BE_Om_OceanWaves.pas 
-Components added to design package GBE3D.dpk.
-
-I also added the sample *SailboatDemo*
+changes:
+* edited GBEPlaneExtend.pas.  
+* Added components in files omSailSurface.pas and BE_Om_OceanWaves.pas 
+* Components added to design package GBE3D.dpk 
+* new sample *SailboatDemo*
 
 ## SailboatDemo
 Firemonkey 3d demo using ocean and sail surfaces with dynamic meshes. 
+
 https://github.com/omarreis/GBE3D/tree/master/demos/SailboatDemo 
 
 ![SailboatDemo screenshot](Screenshot2.png)
