@@ -3,29 +3,27 @@
 Suite de composants 3D pour Delphi Firemonkey
 
 ## In this fork by oMAR
-In this fork of Firemonkey 3D component suite *GBE3D* by Gregory Bersegeay, I tried to extend some of the components to enable my SailboatDemo ( a sailboat model with adjustable sails, a wave system and a sea surface with floating stuff.
+In this fork of Firemonkey 3D component suite *GBE3D* by Gregory Bersegeay, I extended TGBEPlaneExtend to enable my SailboatDemo ( a sailboat model with adjustable sails, a wave system and a sea surface with floating objects ).
 
 Original repository is at https://github.com/gbegreg/GBE3D
 
-I added components *TWaveSystem*, *TOceanSurface* and *TomSailSurface*. 
+changes:
+* edited GBEPlaneExtend.pas  
+* new components added to GBE3D.dpk: *TWaveSystem*, *TOceanSurface* and *TomSailSurface*.  
+* new files omSailSurface.pas and GBE_Om_OceanWaves.pas 
+* new demo app *SailboatDemo* 
 
 I moved the wave definitions to *TWaveSystem*, a non-visual component. 
 TWaveSystem supports 3 simultaneous sin waves. 
-Each wave has properties Amplitude, Vitesse, Longeur and Origine. 
+Each wave has properties Amplitude, Vitesse, Longeur and Origine (a TPoint3d). 
 
-*TOceanSurface* is a dynamic rectangular 3d mesh object. 
-It has a WaveSystem field, so that multiple TOceanSurfaces can share the same TWaveSystem. 
+*TOceanSurface* is a dynamic rectangular mesh. 
+It has a WaveSystem field. Multiple TOceanSurfaces can share the same TWaveSystem. 
 TOceanSurface initially descended from TGBEPlaneExtend, but I changed to TPlane to be able to separate the wave system,
-reproducing the code for TGBEPlaneExtend.
+and reproded the code for TGBEPlaneExtend.
 
 *TomSailSurface* is a basic 3d sail mesh object for main and jib sails. 
 It supports sails with a straight side (main,jib,genoa) and simetric sails (spinaker, code 0).
-
-changes:
-* edited GBEPlaneExtend.pas.  
-* Added components in files omSailSurface.pas and BE_Om_OceanWaves.pas 
-* Components added to design package GBE3D.dpk 
-* new sample *SailboatDemo*
 
 ## SailboatDemo
 Firemonkey 3d demo using ocean and sail surfaces with dynamic meshes. 
