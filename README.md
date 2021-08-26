@@ -20,7 +20,7 @@ Each wave has properties Amplitude, Vitesse, Longeur and Origine (a TPoint3d).
 *TOceanSurface* is a dynamic rectangular mesh. 
 It has a WaveSystem field. Multiple TOceanSurfaces can share the same TWaveSystem. 
 TOceanSurface initially descended from TGBEPlaneExtend, but I changed to TPlane to be able to separate the wave system,
-and reproded the code for TGBEPlaneExtend.
+and copied the code for TGBEPlaneExtend.
 
 *TomSailSurface* is a basic 3d sail mesh object for main and jib sails. 
 It supports sails with a straight side (main,jib,genoa) and simetric sails (spinaker, code 0).
