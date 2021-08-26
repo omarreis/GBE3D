@@ -9,17 +9,18 @@ It is a Delphi Firemonkey 3D application.
 Features:
 * SailboatDemo is based on original GBE3D *waterdemo* sample.
 * Multi platform ( Windows, iOS and Android ).
-* racer boat hull model made with Blender ( embedded )
+* racer boat hull model. Made with Blender ( a collada model embedded ) 
 * Main and jib sails with camber and quadratic leech. Configurable and dynamic sail mesh.
-* Ocean surface moves and the boats stays in the center. 
-* Boat floats on sea waves and changes pitch to match the surface (directional derivative).
+* Ocean surface w/ waves. 
+* Boat stays in the center at 0,0 while the sea surface and land are moved (boatcentric universe)   
+* Boat floats on sea waves and changes pitches  to match sea surface (directional derivative).
 * Objects parented to the OceanSurface float on it (like the boat wake bubbles).
-* A system of TDummys allow setting boat's *course*, *heel* and *sail rotation*
+* A system of TDummys allows setting boat's *course*, *heel* and *pitch* independently, avoiding gymbal locks by not manipulating boat's RotationAngles.
 * Rock with a lighthouse (but no collision detection yet). Few floating objects. 
-* As the boat moves, it leaves a wake f floating bubbles. Bubbles are recycled over time.  
-* Only one small rectangle of sea surface. Boat automaticaly makes U turn when leaving the 30x30 mesh sandbox.
+* As the boat moves, it leaves a wake of floating bubbles. Bubbles are recycled over time.  
+* One rectangle of sea surface. Boat automaticaly makes U turn when leaving the 30x30 mesh sandbox. Todo: a system of tiles.
 * Large textured TDisk represents the sea horizon.
-* Scrollable listbox contains the app controls: camera, boat, waves and object positioning groups. 
+* Scrollable listbox contains the app controls: camera, boat, waves and object groups. 
 * Camera controls: AngleOfView or switch to design camera.
 * Boat controls: movement, Course, Speed, Heel, jib and main sheet.
 * 3 waves w/ configurable params: Amplitude, Longueur, Vitesse and Origine.
