@@ -1,6 +1,6 @@
 # SailboatDemo
 
-![app screenshot1](Screenshot1.png)
+[![SailboatDemo V2](https://img.youtube.com/vi/M9_Z5RxW3Pc/0.jpg)](https://www.youtube.com/watch?v=M9_Z5RxW3Pc)
 
 A 3D sailboat on a moving sea surface with waves and all. 
 This demo application was added to this fork of GBE3D 3d components, by Gregory Bersegeay. 
@@ -33,8 +33,14 @@ as I have added a few components.
 https://github.com/omarreis/GBE3D/releases/tag/V10
 
 ## Video
+
+https://youtu.be/M9_Z5RxW3Pc   SailboatDemo V2 on Youtube
+
 http://www.youtube.com/watch?v=bBpZxB8GLpg   SailboatDemo on Youtube
 
 ![Youtube video](https://img.youtube.com/vi/bBpZxB8GLpg/0.jpg) 
 
 ![app screenshot2](Screenshot2.png)
+
+![app screenshot1](Screenshot1.png)
+
