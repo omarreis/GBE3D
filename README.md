@@ -30,6 +30,8 @@ Firemonkey 3d demo using ocean and sail surfaces with dynamic meshes.
 
 https://github.com/omarreis/GBE3D/tree/master/demos/SailboatDemo 
 
+Current version was released in jun22, compiled with Delphi 11.1 Alexandria.
+
 ![SailboatDemo screenshot](Screenshot2.png)
 
 # GBE3D
