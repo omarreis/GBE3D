@@ -27,10 +27,12 @@ Features:
 * Mouse drag: up=change elevation, rigth/left - rotate camera.
 * Boat controls: movement, Course, Speed, Heel, jib and main sheet.
 * 5 waves w/ configurable params: Amplitude, Longueur, Vitesse and Origine ( same as TGBEPlaneExtend ) 
-* All assets (3d model and textures) are embedded in the form file (fSailboatDemo.fmx). That is why it is so big (25M).
+* All assets (3d model and textures) are embedded in the form file (fSailboatDemo.fmx). That is why the .FMX is so big (25M). 
+ 
+Note: Github does not accept large 25M files on the browser interface. Had to use git command line.
 
 In order to compile this demo, you have to compile and install the GBE3D design package *in this fork*,
-as I have added a few components: Sea surface and Sail surface.
+as I have added a few components: the sea surface and sail surfaces.
 
 ## Windows executable
 https://github.com/omarreis/GBE3D/releases/tag/V20
@@ -39,6 +41,8 @@ https://github.com/omarreis/GBE3D/releases/tag/V20
 
 App is not available in the stores, but runs ok on iOS and Android.
 To run on these devices, you must compile from source.
+
+But you can experiment with this app by using *OPYC* sailing game. OPYC combines the 3D scene with 2D animation using physics (Box2D engine) integrating realtime NOAA GFS winds and high resolution world maps (GSHHG). Available on stores (iOS and Android) search for "OPYC". 
 
 ## Video
 
