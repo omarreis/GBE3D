@@ -33,7 +33,12 @@ In order to compile this demo, you have to compile and install the GBE3D design 
 as I have added a few components: Sea surface and Sail surface.
 
 ## Windows executable
-https://github.com/omarreis/GBE3D/releases/tag/V10
+https://github.com/omarreis/GBE3D/releases/tag/V20
+
+## iOS/Android
+
+App is not available in the stores, but runs ok on iOS and Android.
+To run on these devices, you must compile from source.
 
 ## Video
 
