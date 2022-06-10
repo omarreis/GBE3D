@@ -1,15 +1,19 @@
 unit GBE_Om_OceanWaves;   // Om:  TTwoWavesOceanSurface
 // TGBEPlaneExtend has one wave. Added a second to TTwoWavesOceanSurface
+// actually 3 waves... and counting
+// set21: increased the wave system from 3 to 5 waves
+// jun22: fixed boat pitch calculation
+
 interface
+
 uses
-  System.SysUtils, System.Classes, System.Math,
+  System.SysUtils, System.Classes, System.Math, System.Types,
 
   FMX.Types, FMX.Controls3D, FMX.Objects3D, System.Math.Vectors, FMX.Types3D, generics.Collections,
   System.Threading, FMX.MaterialSources,
-  GBEPlaneExtend;  // TGBEPlaneExtend and WaveRec
+  GBEPlaneExtend;           // TGBEPlaneExtend and WaveRec
 
 type
-
   TWaveSystem = class( TComponent )      // collection of sea surface sinoid waves (3 for now)
   private
     fTime:Single;                          //Om: movd stuff to protected
@@ -23,10 +27,17 @@ type
     fAmplitude3, fLongueur3, fVitesse3 : single;
     fOrigine3:TPoint3d;
 
+    fAmplitude4, fLongueur4, fVitesse4 : single;
+    fOrigine4:TPoint3d;
+
+    fAmplitude5, fLongueur5, fVitesse5 : single;
+    fOrigine5:TPoint3d;
   protected
     function getWaveParams1:TPoint3d;
     function getWaveParams2:TPoint3d;
     function getWaveParams3:TPoint3d;
+    function getWaveParams4:TPoint3d;
+    function getWaveParams5:TPoint3d;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
@@ -49,29 +60,70 @@ type
     property Amplitude3: single read fAmplitude3 write fAmplitude3;
     property Longueur3 : single read fLongueur3  write fLongueur3;
     property Vitesse3  : single read fVitesse3   write fVitesse3;
+
+    property Origine4  : TPoint3D read fOrigine4 write fOrigine4;        // wave 4
+    property Amplitude4: single read fAmplitude4 write fAmplitude4;
+    property Longueur4 : single read fLongueur4  write fLongueur4;
+    property Vitesse4  : single read fVitesse4   write fVitesse4;
+
+    property Origine5  : TPoint3D read fOrigine5 write fOrigine5;        // wave 5
+    property Amplitude5: single read fAmplitude5 write fAmplitude5;
+    property Longueur5 : single read fLongueur5  write fLongueur5;
+    property Vitesse5  : single read fVitesse5   write fVitesse5;
   end;
 
-  TOceanSurface = class( TPlane )   // actually 3 waves
+  TOceanSurface = class( TPlane )
   private
     fWaveSystem:TWaveSystem;
-    procedure CalcWaves;    // W1,W2 = Point3D(Amplitude, Longueur, Vitesse)
+    procedure CalcWaves;
   protected
-    fNbMesh : integer;                     // number of tiles in the mesh
+    fNbMesh : integer;                           // number of tiles in the mesh
     fActiveWaves, fShowlines, fUseTasks : boolean;
-    fCenter : TPoint3D;
+    fDivPerM : TPoint3D;
     fMaterialLignes: TColorMaterialSource;
   public
+    fVirtualSeaOrigin:TPoint3D;    // position of the origin of the virtual sea
+
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
     // Property    Data;  //om: publica
     function    calcWaveAmplitudeAndPitch(P:TPoint3d; const aCap:Single; var aAmplitude,aPitch:Single ):boolean; //Om:
     procedure   Render; override;
+    procedure   MoveTextureBy(var dx,dy:Single);
+    procedure   GetPointsTexCoordinates(var P, TC: String);    // W1,W2 = Point3D(Amplitude, Longueur, Vitesse)
   published
     property ActiveWaves : boolean read fActiveWaves write fActiveWaves;
     property ShowLines: boolean read fShowlines write fShowLines;
     property WaveSystem:TWaveSystem read fWaveSystem write fWaveSystem;
     property MaterialLines : TColorMaterialSource read fMaterialLignes write fMaterialLignes;
+    property DivPerM:TPoint3D read fDivPerM;
   end;
+
+  TWindArrowSurface = class( TPlane )    // Ondulating wind arrow. Less CPU intensive then OceanSurface
+  private
+    fVersion: integer;
+    fWaveSystem:TWaveSystem;  // using only wave 1 here
+    procedure CalcArrowMesh;
+    procedure setVersion(const Value: integer);
+  protected
+    fNbMesh : integer;                           // number of tiles in the mesh
+    fActiveWaves, fShowlines, fUseTasks : boolean;
+    fDivPerM : TPoint3D;
+    fMaterialLignes: TColorMaterialSource;
+    procedure SetDepth(const Value: Single); override;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor  Destroy; override;
+    // Property    Data;  //om: publica
+    procedure   Render; override;
+  published
+    property ActiveWaves : boolean read fActiveWaves write fActiveWaves;
+    property ShowLines: boolean read fShowlines write fShowLines;
+    property MaterialLines : TColorMaterialSource read fMaterialLignes write fMaterialLignes;
+    property DivPerM:TPoint3D read fDivPerM;
+
+    Property version:integer     read fVersion      write setVersion;
+end;
 
   TTwoWavesOceanSurface = class(TOceanSurface);     // compatibility w/ old forms
 
@@ -81,7 +133,7 @@ implementation         //---------------------------------------------------
 
 procedure Register;
 begin
-  RegisterComponents('GBE3D', [TWaveSystem, TOceanSurface, TTwoWavesOceanSurface]);
+  RegisterComponents('GBE3D', [TWaveSystem, TOceanSurface, TTwoWavesOceanSurface, TWindArrowSurface]);
 end;
 
 { TWaveSystem }
@@ -92,21 +144,30 @@ begin
 
   fTime := 0;
 
-  fAmplitude := 2;    // wave params
-  fLongueur  := 5;    // Om: only 1 ?
-  fVitesse   := 5;    //
-  fOrigine   := Point3D(1,1 , 2);
+  fAmplitude  := 2.5;    // wave params
+  fLongueur   := 5;    // Om: only 1 ?
+  fVitesse    := 5;    //
+  fOrigine    := Point3D(1,1 , 2);
 
   fAmplitude2 := 1.1; //2.5;      //wave 2 params
   fLongueur2  := 2.1;
   fVitesse2   := 3;
   fOrigine2   := Point3D(3, 10, 2);  // (SubdivisionsWidth/Width, SubdivisionsHeight/Height, 2)
 
-  fAmplitude3 := 1.5; //1;      //wave 3 params
+  fAmplitude3 := 1.5;       //wave 3 params
   fLongueur3  := 4.2;
   fVitesse3   := 3.2;
-
   fOrigine3   := Point3D(7, -8, 1);
+
+  fAmplitude4 := 0.5;      //wave 4 params
+  fLongueur4  := 2.2;
+  fVitesse4   := 2.2;
+  fOrigine4   := Point3D(7, -8, 1);
+
+  fAmplitude5 := 0.7;       //wave 5 params
+  fLongueur5  := 4.2;
+  fVitesse5   := 2.2;
+  fOrigine5   := Point3D(7, -8, 1);
 end;
 
 destructor TWaveSystem.Destroy;
@@ -129,9 +190,19 @@ begin
   Result := Point3D(fAmplitude3, fLongueur3, fVitesse3);
 end;
 
+function TWaveSystem.getWaveParams4: TPoint3d;
+begin
+  Result := Point3D(fAmplitude4, fLongueur4, fVitesse4);
+end;
+
+function TWaveSystem.getWaveParams5: TPoint3d;
+begin
+  Result := Point3D(fAmplitude5, fLongueur5, fVitesse5 );
+end;
+
 procedure TWaveSystem.IncTime;
 begin
-  fTime := fTime + 0.01;    // advance wave time   // Om: changed from 0.01 to 0.02
+  fTime := fTime + 0.010;      // advance wave time.. slow advance
 end;
 
 { TOceanSurface }
@@ -139,14 +210,17 @@ end;
 constructor TOceanSurface.Create(AOwner: TComponent);
 begin
   inherited;
+
   fWaveSystem := nil;
   self.SubdivisionsHeight := 30;     // plane subdivisions
   self.SubdivisionsWidth  := 30;
 
   fNbMesh   := (SubdivisionsWidth + 1) * (SubdivisionsHeight + 1);
-  // fCenter = SubD / width  ( unit div/m  )
-  fCenter   := Point3D( SubdivisionsWidth / self.Width, SubdivisionsHeight / self.Height, 0);
+  // fDivPerM = SubD / width  -->  units div/m
+  fDivPerM   := Point3D( SubdivisionsWidth / self.Width, SubdivisionsHeight / self.Height, 0);
+
   fUseTasks := true;         // default= using tasks instead of inline mesh builds
+  fVirtualSeaOrigin := Point3D( 0,0,0);
 end;
 
 destructor TOceanSurface.Destroy;
@@ -154,95 +228,186 @@ begin
   inherited;
 end;
 
+Function MyFrac(const n:single):Single;
+begin
+   Result := Frac(n);
+   if (Result<0) then  Result:=Result+1.0;
+end;
+
+// MoveTextureBy uses existent mesh, by just displacing the tex pts
+procedure TOceanSurface.MoveTextureBy(var dx,dy:Single);         // dx,dy in  3d units (m)
+var
+  M:TMeshData;
+  S:String;
+  x,y : integer;
+  front, back : TPointF;
+  ixf,ixb:integer;
+  du,dv:Single;
+
+begin
+  M := self.Data;    //get mesh
+
+  fVirtualSeaOrigin := fVirtualSeaOrigin - Point3D(dx, dy, 0);  // move by virtual sea coordinate system
+
+  du := dx/Width;       // in 0..1 range
+  dv := dy/Height;
+
+  fNbMesh   := (SubdivisionsWidth + 1) * (SubdivisionsHeight + 1);
+
+  for y := 0 to SubdivisionsHeight do
+    for x := 0 to SubdivisionsWidth do
+       begin
+         ixf := X + (Y * (SubdivisionsWidth+1));               //calc front and back point indexes
+         ixb := fNbMesh + X + (Y * (SubdivisionsWidth+1));
+
+         front := M.VertexBuffer.TexCoord0[ixf];   // TexCoord0 must be in 0.0 .. 1.0  range  ( UV coordinates )
+         back  := M.VertexBuffer.TexCoord0[ixb];
+
+         front.x  := MyFrac( front.x + du );       // Frac() wraps around the texture coordinates
+         front.y  := MyFrac( front.y + dv );       // TODO: this leaves the last row,column w/ inverted texture ..
+
+         back.x   := MyFrac( back.x  + du );
+         back.y   := MyFrac( back.y  + dv );
+
+         M.VertexBuffer.TexCoord0[ixf] := front;
+         M.VertexBuffer.TexCoord0[ixb] := back;
+       end;
+
+  // format TexCoordinates as a str
+  //    '0.0 0.0, 1 0, 0.0 1, 1 1';
+  // S := FloatToStr(u)  +' '+FloatToStr(v)   +','+
+  //      FloatToStr(u+1)+' '+FloatToStr(v)   +','+
+  //      FloatToStr(u)  +' '+FloatToStr(v+1) +','+
+  //      FloatToStr(u+1)+' '+FloatToStr(v+1);
+//  M.Points         :=
+//  M.TexCoordinates :=
+end;
+
+procedure TOceanSurface.GetPointsTexCoordinates(var P,TC:String);
+var
+  M:TMeshData;
+begin
+  M := self.Data;    //get mesh
+
+  P  := M.Points;
+  TC := M.TexCoordinates;
+end;
+
 procedure TOceanSurface.CalcWaves;    // Wx = Point3D(Amplitude, Longueur, Vitesse)
 var
   M:TMeshData;
   x,y : integer;
+  ax,ay:Single;
   somme: single;
   PCenter:TPoint3D;
   front, back : PPoint3D;
-  waveRec1,waveRec2,waveRec3 : TWaveRec;
+  waveRec1,waveRec2,waveRec3,waveRec4,waveRec5 : TWaveRec;
 begin
   if not Assigned(fWaveSystem) then exit;
 
   M := self.Data;    //get mesh
   // init waveRecs
-  PCenter := Point3d( SubdivisionsWidth, SubdivisionsHeight, 0)*0.5;
-
-  waveRec1.P := PCenter + fWaveSystem.Origine  * fCenter;    // calc sin wave origin position
-  waveRec1.D := fWaveSystem.getWaveParams1;      // D = Point3D( Amplitude, Longueur, Vitesse)
-
-  waveRec2.P := PCenter + fWaveSystem.fOrigine2 * fCenter;
-  waveRec2.D := fWaveSystem.getWaveParams2;
-
-  waveRec3.P := PCenter + fWaveSystem.fOrigine3 * fCenter;
-  waveRec3.D := fWaveSystem.getWaveParams3;
-
+  PCenter   := Point3d( SubdivisionsWidth, SubdivisionsHeight, 0)*0.5;
+  fDivPerM  := Point3D( SubdivisionsWidth / self.Width, SubdivisionsHeight / self.Height, 0);
   fNbMesh   := (SubdivisionsWidth + 1) * (SubdivisionsHeight + 1);
 
+  // Waves 1 and 2 move with OceanSurface, like the floating stuff
+  waveRec1.P := fWaveSystem.Origine+fVirtualSeaOrigin*fDivPerM;   // calc sin wave origin position
+  waveRec1.D := fWaveSystem.getWaveParams1;      // D = Point3D( Amplitude, Longueur, Vitesse)
+
+  waveRec2.P := fWaveSystem.fOrigine2+fVirtualSeaOrigin*fDivPerM;
+  waveRec2.D := fWaveSystem.getWaveParams2;
+
+  // waves 3,4,5 move with the boat
+  waveRec3.P := fWaveSystem.fOrigine3;
+  waveRec3.D := fWaveSystem.getWaveParams3;
+
+  waveRec4.P := fWaveSystem.fOrigine4;
+  waveRec4.D := fWaveSystem.getWaveParams4;
+
+  waveRec5.P := fWaveSystem.fOrigine5;
+  waveRec5.D := fWaveSystem.getWaveParams5;
+
   for y := 0 to SubdivisionsHeight do
-     for x := 0 to SubdivisionsWidth do
-       begin
-         // preserve original vertice's x,y.  Apply wave to z
-         front := M.VertexBuffer.VerticesPtr[X + (Y * (SubdivisionsWidth+1))];
-         back  := M.VertexBuffer.VerticesPtr[fNbMesh + X + (Y * (SubdivisionsWidth+1))];
-         // calc sum of wave amplitudes.  Here x,y is in division units ! ( not m )
-         somme := 0;
-         somme := waveRec1.Wave(somme, x, y, fWaveSystem.fTime);  // 1 st
-         somme := waveRec2.Wave(somme, x, y, fWaveSystem.fTime);  // 2 nd
-         somme := waveRec3.Wave(somme, x, y, fWaveSystem.fTime);  // 3 rd
+    begin
+        ay  := y-PCenter.y;   // + PCenter.y;
+        for x := 0 to SubdivisionsWidth do
+         begin
+           ax :=  x-PCenter.x;      // + PCenter.x;  //ax,ay in div
+           // preserve original TPlane vertice's x,y.   Apply wave amplitude to z coordinate
+           front := M.VertexBuffer.VerticesPtr[X + (Y * (SubdivisionsWidth+1))];
+           back  := M.VertexBuffer.VerticesPtr[fNbMesh + X + (Y * (SubdivisionsWidth+1))];
+           // calc sum of wave amplitudes.  Here x,y is in division units ! ( not m )
 
-         somme := somme * 100;                        // scale amplitude to div x 100 ?!
+           somme := 0;                         // sum, effect of waves
+           somme := waveRec1.Wave(somme, ax, ay, fWaveSystem.fTime);  // 1 st
+           somme := waveRec2.Wave(somme, ax, ay, fWaveSystem.fTime);  // 2 nd
+           somme := waveRec3.Wave(somme, ax, ay, fWaveSystem.fTime);  // 3 rd
+           somme := waveRec4.Wave(somme, ax, ay, fWaveSystem.fTime);  // 4 nd
+           somme := waveRec5.Wave(somme, ax, ay, fWaveSystem.fTime);  // 5 nd
 
-         Front^.Z := somme;
-         Back^.Z  := somme;
-       end;
+           somme := somme * 100;                        // scale amplitude to div x 100 ?!
+
+           Front^.Z := somme;
+           Back^.Z  := somme;
+         end;
+     end;
 
   M.CalcTangentBinormals;
 
-  fWaveSystem.IncTime;  //adv time by 0.01
+  fWaveSystem.IncTime;  //adv time by 0.01 sec
 
 end;
 
-// local wave coordinates in P.x,P.z
+// P in m
 function TOceanSurface.calcWaveAmplitudeAndPitch( P:TPoint3d; const aCap:Single; var aAmplitude,aPitch:Single ):boolean; //Om:
-var  waveRec1,waveRec2,waveRec3:TWaveRec;
-     aSumAmpl,aSumDeriv,D,AbsD,x,y:Single;
-     PCenter:TPoint3d;
+var  waveRec1,waveRec2,waveRec3,waveRec4,waveRec5:TWaveRec;
+     aSumAmpl,aSumDeriv,D,AbsD,ax,ay:Single;
+     // PCenter:TPoint3d;
 
 begin
    Result := false;
    if not Assigned(fWaveSystem) then exit;
 
    // init waveRecs
-   PCenter := Point3d( SubdivisionsWidth, SubdivisionsHeight, 0)*0.5;
+   // PCenter := Point3d( SubdivisionsWidth, SubdivisionsHeight, 0)*0.5;
+   fDivPerM := Point3D( SubdivisionsWidth / self.Width, SubdivisionsHeight / self.Height, 0);
 
-   waveRec1.P := PCenter + fWaveSystem.Origine  * fCenter;  // calc sin wave origin position
+   // waves 1 n 2 Oringines move with the sea surface
+   waveRec1.P := fWaveSystem.Origine   + fVirtualSeaOrigin * fDivPerM;  // calc sin wave origin position
    waveRec1.D := fWaveSystem.getWaveParams1;      // D = Point3D( Amplitude, Longueur, Vitesse)
 
-   waveRec2.P := PCenter + fWaveSystem.fOrigine2 * fCenter;
+   waveRec2.P := fWaveSystem.fOrigine2 + fVirtualSeaOrigin * fDivPerM;  // + fVirtualSeaOrigin * fDivPerM;
    waveRec2.D := fWaveSystem.getWaveParams2;
 
-   waveRec3.P := PCenter + fWaveSystem.fOrigine3 * fCenter;
+   // waves 3,4,5 move with the boat ( stationary )
+   waveRec3.P := fWaveSystem.fOrigine3;          // ugly array :(
    waveRec3.D := fWaveSystem.getWaveParams3;
+
+   waveRec4.P := fWaveSystem.fOrigine4;
+   waveRec4.D := fWaveSystem.getWaveParams4;
+
+   waveRec5.P := fWaveSystem.fOrigine5;
+   waveRec5.D := fWaveSystem.getWaveParams5;
 
    // Sum amplitudes. Note that the derivative of a sum is the sum of the derivatives
    //   f(x)=g(x)+h(x)    ---> f'(x)=g'(x)+h'(x)
-
-   x := (P.x*SubdivisionsWidth -Position.x ) + PCenter.x;
-   y := (P.z*SubdivisionsHeight+Position.z ) + PCenter.y;
+   ax := ( P.x - Position.x )*fDivPerM.x;  // ax,ay in div
+   ay := ( P.z + Position.z )*fDivPerM.y;
 
    aSumAmpl  := 0;
    aSumDeriv := 0;
 
-   if waveRec1.calcWaveAmplitudeAndPitch(aCap, x, y, fWaveSystem.fTime,{out:} aSumAmpl, aSumDeriv) and     // x,y in divs
-      waveRec2.calcWaveAmplitudeAndPitch(aCap, x, y, fWaveSystem.fTime,{out:} aSumAmpl, aSumDeriv) and
-      waveRec3.calcWaveAmplitudeAndPitch(aCap, x, y, fWaveSystem.fTime,{out:} aSumAmpl, aSumDeriv) then
+   if waveRec1.calcWaveAmplitudeAndPitch(aCap, ax, ay, fWaveSystem.fTime,{out:} aSumAmpl, aSumDeriv) and     // x,y in divs
+      waveRec2.calcWaveAmplitudeAndPitch(aCap, ax, ay, fWaveSystem.fTime,{out:} aSumAmpl, aSumDeriv) and
+      waveRec3.calcWaveAmplitudeAndPitch(aCap, ax, ay, fWaveSystem.fTime,{out:} aSumAmpl, aSumDeriv) and
+      waveRec4.calcWaveAmplitudeAndPitch(aCap, ax, ay, fWaveSystem.fTime,{out:} aSumAmpl, aSumDeriv) and
+      waveRec5.calcWaveAmplitudeAndPitch(aCap, ax, ay, fWaveSystem.fTime,{out:} aSumAmpl, aSumDeriv) then
         begin
           Result := true;
           aAmplitude := aSumAmpl*100;   // scale amplitude x 100, as was done creating the mesh
-          //calc pitch in degrees
-          D    := aSumDeriv*100;            // scale deriv by 1000 ( cause amplitudes
+          // calc pitch in degrees
+          D    := aSumDeriv*100*3;      // scale deriv by 1000 ( cause amplitudes )
           AbsD := Abs(D);
           if (AbsD>1) then D:=D/AbsD;
           if (D>=-1.0) and (D<=1.0) then aPitch := ArcSin( D )*180/Pi;     // ad hoc formula
@@ -316,6 +481,159 @@ begin
 
   if ShowLines then
     Context.DrawLines(self.Data.VertexBuffer, self.Data.IndexBuffer, TMaterialSource.ValidMaterial(fMaterialLignes),1);
+end;
+
+
+{ TWindArrowSurface }
+
+
+constructor TWindArrowSurface.Create(AOwner: TComponent);
+begin
+  inherited;     // TPlane.Create
+
+  // create an own wave system
+  fWaveSystem := TWaveSystem.Create(nil);
+
+  fWaveSystem.Amplitude := 0.8;    // set wave 1
+  fWaveSystem.Vitesse   := 20.0;
+  fWaveSystem.Longueur  := 1.1;
+  fWaveSystem.Origine   := Point3D( 0, -10, 0);     // to have ondulation on y axis
+
+  fWaveSystem.Amplitude2 := 0; // don't need those
+  fWaveSystem.Amplitude3 := 0;
+  fWaveSystem.Amplitude4 := 0;
+  fWaveSystem.Amplitude5 := 0;
+
+  SubdivisionsHeight := 25;   // default plane subdivisions
+  SubdivisionsWidth  :=  2;
+
+  fNbMesh   := (SubdivisionsWidth + 1) * (SubdivisionsHeight + 1);
+  // fDivPerM = SubD / width  -->  units div/m
+  fDivPerM   := Point3D( SubdivisionsWidth / self.Width, SubdivisionsHeight / self.Height, 0);
+
+  fUseTasks := true;         // default= using tasks instead of inline mesh builds
+  fVersion  := 0;
+end;
+
+destructor TWindArrowSurface.Destroy;
+begin
+  fWaveSystem.Free;
+  inherited;
+end;
+
+// transforms a plane into an arrow, by squeezing the x coordinate
+procedure TWindArrowSurface.CalcArrowMesh;                                      //
+var                                                                             //         0.0
+  M:TMeshData;                                                                  //  Y       /\    0.5
+  x,y : integer;                                                                //         /  \
+  front,back:PPoint3D;                                                          //        /    \
+  somme,h,Dh,z,ah,al,ax,ay:Single;                                              //       +--  --+ 0.3
+  waveRec1:TWaveRec;                                                            //         |  |
+  PCenter:TPoint3D;                                                             //         |  |
+                                                                                //         |  |   0
+  function _xArrowFunction(const aAx,aAy:Single ):Single; // takes a plane mesh //         |  |
+  begin                                                  // and turns it into   //         |  |
+    if (aAy>=0.3) then Result := aAx*(0.5-aAy)/0.1      // an arrow             //  +    + +--+  -0.5    X >
+    else Result := aAx/1.6;   // for y in -0.5..0.4, slim the mesh              //     -0.5  0 0.5
+  end;
+
+begin
+  // sail params sanity test
+  if (SubdivisionsHeight<=0) or (SubdivisionsWidth<=0) then exit;  // invalid subdiv values
+
+  M        := self.Data;    // use default TPlane mesh
+  fNbMesh  := (SubdivisionsWidth + 1) * (SubdivisionsHeight + 1);  //recalc mesh number of vertices
+
+  // mesh is calculated to fit into  [-0.5,-0.5..0.5,0.5] interval.
+  h  := -0.5;
+  Dh :=  1.0/SubdivisionsHeight;
+  // this will create an arrow mesh in h range -0.5 .. 0.5
+
+  PCenter   := Point3D( SubdivisionsWidth / self.Width, SubdivisionsHeight / self.Height, 0);
+
+  // Wave 1
+  waveRec1.P := fWaveSystem.Origine;         // calc sin wave origin position
+  waveRec1.D := fWaveSystem.getWaveParams1;  // D = Point3D( Amplitude, Longueur, Vitesse)
+
+  for y := 0 to SubdivisionsHeight do
+    begin
+
+       somme := 0;      // arrow ondulation
+       somme := waveRec1.Wave(somme, 0, y, fWaveSystem.fTime) * 1000;
+
+       for x := 0 to SubdivisionsWidth do                                       //                      L
+         begin                                                                  //
+           front := M.VertexBuffer.VerticesPtr[X + (Y * (SubdivisionsWidth+1))];
+           back  := M.VertexBuffer.VerticesPtr[fNbMesh + X + (Y * (SubdivisionsWidth+1))];
+
+           ax := -0.5+x/SubdivisionsWidth;
+           ax := _xArrowFunction( ax, h );  // L,h in -0.5..0.5 range
+           ay :=  h;
+
+           Front^.X := ax;
+           Front^.Y := ay;
+
+           Back^.X  := ax;
+           Back^.Y  := ay;
+
+           // add some sail side movement ( camber )    //
+
+           Front^.Z := somme;
+           Back^.Z  := somme;
+         end;
+      h := h+Dh;       //inc h
+    end;
+
+  M.CalcTangentBinormals;
+  // fTime := fTime + 0.01;  //??
+  fWaveSystem.IncTime;  //adv time by 0.01 sec
+end;
+
+procedure TWindArrowSurface.Render;
+begin
+  inherited;
+
+  if Assigned(fWaveSystem) and fActiveWaves then
+    begin
+      if fUseTasks then
+        begin
+          TTask.Create( procedure
+                        begin
+                          CalcArrowMesh;   // recalc mesh
+                        end).start;
+        end
+        else begin
+          CalcArrowMesh;
+        end;
+    end;
+
+  if ShowLines then
+    Context.DrawLines(self.Data.VertexBuffer, self.Data.IndexBuffer, TMaterialSource.ValidMaterial(fMaterialLignes),1);
+end;
+
+procedure TWindArrowSurface.setVersion(const Value: integer);
+begin
+  if (fVersion<>Value)  then
+     begin
+       CalcArrowMesh;     // recalc mesh
+       fVersion := Value;
+     end;
+end;
+
+procedure TWindArrowSurface.SetDepth(const Value: Single);   // override TPlane tendency to set Depth to 0.01
+begin
+  if (Self.fDepth<>Value) then   // this copies what TPlane removed
+    begin
+      Self.fDepth := Value;
+      Resize3D;
+      if (FDepth < 0) and (csDesigning in ComponentState) then
+        begin
+          FDepth   := abs(FDepth);
+          FScale.Z := -FScale.Z;
+        end;
+      if not (csLoading in ComponentState) then
+        Repaint;
+    end;
 end;
 
 

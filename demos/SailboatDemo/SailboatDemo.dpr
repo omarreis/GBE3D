@@ -5,6 +5,7 @@ uses
   fSailboatDemo in 'fSailboatDemo.pas' {FormSailboatDemo};
 
 {$R *.res}
+
 begin
   Application.Initialize;
   Application.CreateForm(TFormSailboatDemo, FormSailboatDemo);

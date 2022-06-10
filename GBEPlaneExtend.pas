@@ -1,7 +1,7 @@
 unit GBEPlaneExtend;  // Om: GBEPlaneExtend implements a rectangular mesh with oe source of sin wave
-
-
-// Om: added comments to help understanding Gregory's code
+ //------------------//
+// Om: Extended TWaveRec to calc amplitude and pitch
+// Om: added excessive comments to help understanding Gregorys code
 
 interface
 uses
@@ -76,40 +76,51 @@ begin
   // D.x = MaxAmplitude in div ?
   // D.y = WaveLenght   in div
   // D.z = WaveSpeed    in div/s
-  if (D.Y>0)  then            // ignore if wave length <= 0
+  if (D.Y>0) and (D.x>0)  then            // ignore if wave length<=0 Om: ..or Amplitude=0 ( which produces no effect )
     begin
-      Ph := L/D.y - D.z*aT;   // calc wave phase at the point
-      Result := Result + D.x * sin(Ph) * 0.001;    // add sin() wave amplitude / 1000    ( result inside +- MaxAmplitude*0.001 )
+      Ph     := L/D.y - D.z*aT;   // calc wave phase at the point
+      Result := Result + D.x * sin(Ph)*0.001;    // sum sin() wave amplitude / 1000  ( result inside +- MaxAmplitude*0.001 )
     end;
 end;
 
-// Wave world is in x,y        z is the wave height ( amplitude )
+// here wave world is in x,y        z is the wave height ( amplitude )
 function TWaveRec.calcWaveAmplitudeAndPitch(aCap, aX, aY, aT : single; var aSumAmplitude,aSumDerivative:Single):boolean;
-var L,L1,Ph,Ph1,aAng,aAmp,aAmp1,aDeriv,DzaT:single; P0,P1:TPoint3D;
+var L,L0,L1,Ph,Ph0,Ph1,aAng,aAmp,aAmp0,aAmp1,aDeriv,DzaT:single;
+    aP,P0,P1,DP:TPoint3D;
 begin
-  Result := false;
-  P0 := Point3d(aX,aY,0);
-  L  := P.Distance( P0 );  // L= dist to sin wave origin P
+  Result := true;          // always
+  aP := Point3d(aX,aY,0);  // requested coordinate
+  L  := P.Distance( aP );  // L= dist to sin wave origin P
 
-  if (D.Y>0)  then            // ignore if wave length <= 0
+  if (D.Y>0) and (D.x>0)  then            // ignore if wave length D.Y <= 0  or Amplitude D.x <=0
     begin
       Result := true;
-      DzaT   := D.z*aT;               // memoise speed*DT
-      Ph     := L/D.y - DzaT;        // calc wave phase at the point
-      aAmp   := D.x * sin(Ph) * 0.001;  // add sin() wave amplitude / 1000    ( result inside +- MaxAmplitude*0.001 )
-      P0.z   := aAmp;
+      DzaT   := D.z*aT;                  // memoise speed*DT (=wave displacement)
+
+      Ph     := L/D.y - DzaT;            // calc wave phase at the point P
+      aAmp   := D.x * sin(Ph) * 0.001;   // add sin() wave amplitude / 1000    ( result inside +- MaxAmplitude*0.001 )
+      // P.z    := aAmp;   //dont do that !
+
       // calc directional derivative
       aAng  := -aCap*Pi/180;       // cap to radians
-      P1    := P0 + Point3d(sin(aAng), cos(aAng), 0);  // move 1.0 unit in cap direction
-      L1    := P.Distance( P1 );  //calc amplitude for new pt
+      DP    := Point3d(sin(aAng), cos(aAng), 0)/2;  // semi displacement vector in boat direction dir
+      // P0=pt 1/2 div before
+      P0    := aP - DP;  // move .5 unit in -cap direction
+      L0    := P.Distance( P0 );       // calc amplitude for P0
+      Ph0   := L0/D.y - DzaT;
+      aAmp0 := D.x * sin(Ph0) * 0.001;  // add sin() wave amplitude / 1000    ( result inside +- MaxAmplitude*0.001 )
+      // P1=pt 1/2 div after
+      P1    := aP + DP/2;  // move 0.5 unit in cap direction
+      L1    := P.Distance( P1 );  //calc amplitude for P1
       Ph1   := L1/D.y - DzaT;
-      aAmp1 := D.x * sin(Ph1) * 0.001;  // add sin() wave amplitude / 1000    ( result inside +- MaxAmplitude*0.001 )
-      P1.z  := aAmp1;
-      aDeriv := aAmp1-aAmp;  // directions derivative calculated at a point 1m away, in cap direction
+      aAmp1 := D.x * sin(Ph1) * 0.001;
+
+      // derivative calculated from -0.5 to +0.5 div
+      aDeriv := (aAmp1-aAmp0);       // directional derivative calculated in P0-P1
       // add amplitude to sum
 
-      aSumAmplitude  := aSumAmplitude  + aAmp;
-      aSumDerivative := aSumDerivative + aDeriv;
+      aSumAmplitude  := aSumAmplitude  + aAmp;    // accumulate
+      aSumDerivative := aSumDerivative + aDeriv;  // derivative of sum = sum of derivatives
     end;
 end;
 
