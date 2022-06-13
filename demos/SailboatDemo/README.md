@@ -34,14 +34,14 @@ Note: Github does not accept large 25M files on the browser interface. Had to us
 In order to compile this demo, you have to compile and install the GBE3D design package *in this fork*,
 as I have added a few components: the sea surface and sail surfaces.
 
-## Rigged form
+## Rigged boat
 
 Form in fSailboatDemo.pas is rigged to be controlled externally.  These functions allow manipulating the state of the boat:
 
-    procedure SetBoatState(const aCap,aHeel,aSpeed,aBoomAngle,aRudderAngle,aWindDir,aWindSpeed:Single);  // sets state of boat params
-    procedure SetSailShape( ixSail:integer; aPtArray:TPointF_Array );                                    // sets sail surface to a given polyline 
-    procedure set3DcharacterState(ix:integer; const x,y,alfa:Single);   // ix = which char               // sets position anmd state of an animated character
-    procedure set3dMarks(ix:integer; const ax,ay:Single);                                                // set mark postion
+    procedure SetBoatState(const aCap,aHeel,aSpeed,aBoomAngle,aRudderAngle,aWindDir,aWindSpeed:Single);  // sets state of boat 
+    procedure SetSailShape( ixSail:integer; aPtArray:TPointF_Array );                                    // sets sail surf to a profile
+    procedure set3DcharacterState(ix:integer; const x,y,alfa:Single);   // ix = which char               // sets position and rotation of an animated character
+    procedure set3dMarks(ix:integer; const ax,ay:Single);                                                // sets mark postion
 
 ## Windows executable
 https://github.com/omarreis/GBE3D/releases/tag/V20
