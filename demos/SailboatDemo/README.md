@@ -41,8 +41,11 @@ Form in fSailboatDemo.pas is rigged to be controlled externally.  These function
 
     procedure SetBoatState(const aCap,aHeel,aSpeed,aBoomAngle,aRudderAngle,aWindDir,aWindSpeed:Single);  // sets state of boat 
     procedure SetSailShape( ixSail:integer; aPtArray:TPointF_Array );                                    // sets sail surf to a profile
-    procedure set3DcharacterState(ix:integer; const x,y,alfa:Single);   // ix = which char               // sets position and rotation of an animated character
+    procedure set3DcharacterState(ix:integer; const x,y,alfa:Single);   // ix = which char               // sets position and rotation of an animated char
     procedure set3dMarks(ix:integer; const ax,ay:Single);                                                // sets mark postion
+    
+    Procedure setTerrainBitmap(bVisible:boolean; aBMP:TBitmap);  // use a gray shade bitmap to set large scale terrain map                     
+
 
 ## Windows executable
 https://github.com/omarreis/GBE3D/releases/tag/V20
