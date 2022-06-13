@@ -33,8 +33,13 @@ Features:
  
 Note: At this time Github web does not accept files larger than 25MB to be moved. I had to use git command line to update fSailboatDemo.fmx.
 
-In order to compile this demo, you have to install the GBE3D design package *in this fork*,
-as I have added a few components: the sea surface and sail surfaces.
+
+## Compiling SailboatDemo
+
+In order to compile this demo you have to install the *GBE3D* design package *in this fork*,
+as I have added components sea surface and sail surface.
+
+Tested with Delphi 11.1 on Windows, iOS and Android (jun/22)
 
 ## Rigged boat
 
