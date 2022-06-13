@@ -23,7 +23,7 @@ Features:
 * As the boat moves, it leaves a wake of floating bubbles. Random bubbles are recycled over time.  
 * The main rectangle of sea surface (30x30) is surrounded by 4 other, less detailled, sea surface rectangles.  
 * Large textured TDisk underneath represents the sea horizon.
-* Scrollable listbox contains all app controls: camera, boat, waves and object groups ( click button at top-right to toggle controls) 
+* Scrollable listbox contains all app controls: camera, boat, waves and object groups ( click button at top-left to toggle controls) 
 * Main camera controls: AngleOfView, Azimuth and elevation. 
 * Option to design camera. Note that design camera cannot be zoomed or moved.
 * Mouse actions: drag up/down=change elevation, drag rigth/left rotates camera.
