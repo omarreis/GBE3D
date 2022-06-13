@@ -13,22 +13,22 @@ Features:
 * Multi platform ( Windows, iOS and Android ).
 * Original sailboat hull model. Made with Blender ( a collada model embedded ). 
 * Main and jib sails with camber and quadratic leech. Configurable and dynamic sail mesh.
-* Ocean surface w/ waves. 
+* Ocean surface animated with waves. 
 * Boat and sea surface fixed at the 3D world center at 0,0 (boatcentric universe)   
-* Boat floats on waves and pitches to match wave directional derivative.
+* Boat floats on waves and pitches to match directional derivative.
 * Objects parented to OceanSurface float on it and are moved with boatspeed (ex: wake bubbles). 
-* Standing sea surface implemented with a movable 3d texture. 
+* Sea surface implemented with a movable 3d texture. 
 * A system of TDummys allows setting boat's *course*, *heel* and *pitch* independently, avoiding gymbal locks that might have occured by manipulating RotationAngles. Advice for 3d programmers: Never change all 3 dimensions (x,y,z) of a 3Dobject.RotationAngles.
 * Rock with lighthouse (but no collision detection yet). A few other floating objects. 
 * As the boat moves, it leaves a wake of floating bubbles. Random bubbles are recycled over time.  
-* The main ectangle of sea surface (30x30) is surrounded by 4 other, less detailled sea surface rectangles.  
+* The main rectangle of sea surface (30x30) is surrounded by 4 other, less detailled, sea surface rectangles.  
 * Large textured TDisk underneath represents the sea horizon.
-* Scrollable listbox contains all app controls: camera, boat, waves and object groups ( click button at top-right to toggle ontrols) 
-* Camera controls: AngleOfView, Azimuth and elevation 
-* Option to design camera. Note that this camera cannot be zoomed or moved.
+* Scrollable listbox contains all app controls: camera, boat, waves and object groups ( click button at top-right to toggle controls) 
+* Main camera controls: AngleOfView, Azimuth and elevation. 
+* Option to design camera. Note that design camera cannot be zoomed or moved.
 * Mouse actions: drag up/down=change elevation, drag rigth/left rotates camera.
 * Boat controls: toggle movement, Course, Speed, Heel, jib and main sheet (sail rotation).
-* Wave system is a sum of 5 senoid waves w/ configurable params: Amplitude, Longueur, Vitesse and Origine ( same as TGBEPlaneExtend, Om: kept the french names ) 
+* Wave system is a sum of 5 senoid waves w/ configurable Amplitude, Longueur, Vitesse and Origine ( same as TGBEPlaneExtend, Om: kept the french names ) 
 * All assets (3d model and textures) embedded in the form file (fSailboatDemo.fmx). That is why the .FMX is so big (25M). 
  
 Note: At this time Github web does not accept files larger than 25MB to be moved. I had to use git command line to update fSailboatDemo.fmx.
