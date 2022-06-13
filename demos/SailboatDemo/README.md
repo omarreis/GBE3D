@@ -14,15 +14,16 @@ Features:
 * Original sailboat hull model. Made with Blender ( a collada model embedded ). 
 * Main and jib sails with camber and quadratic leech. Configurable and dynamic sail mesh.
 * Ocean surface w/ waves. 
-* Boat stays in the center at 0,0 while the sea surface and land are moved (boatcentric universe)   
-* Boat floats on waves and pitches to match waves directional derivative.
-* Objects parented to OceanSurface float on it and are moved with boatspeed (like the wake bubbles). This is achieved by using a movable 3d texture.
-* A system of TDummys allows setting boat's *course*, *heel* and *pitch* independently, avoiding gymbal locks that might have occured by manipulating RotationAngles. Advice for 3d programmers: Never change all 3 dimensions (x,y,z) of 3Dobject.RotationAngles.
-* A rock with a lighthouse (but no collision detection yet). A few other floating objects. 
-* As the boat moves, it leaves a wake of floating bubbles. Bubbles are recycled over time.  
-* Central rectangle of sea surface (30x30) is surrounded by 4 other, less detailled sea surface rectangle.  
-* Large textured TDisk represents the sea horizon.
-* Scrollable listbox contains the app controls: camera, boat, waves and object groups ( click button at top-right to open controls) 
+* Boat and sea surface fixed at the 3D world center at 0,0 (boatcentric universe)   
+* Boat floats on waves and pitches to match wave directional derivative.
+* Objects parented to OceanSurface float on it and are moved with boatspeed (ex: wake bubbles). 
+* Standing sea surface implemented with a movable 3d texture. 
+* A system of TDummys allows setting boat's *course*, *heel* and *pitch* independently, avoiding gymbal locks that might have occured by manipulating RotationAngles. Advice for 3d programmers: Never change all 3 dimensions (x,y,z) of a 3Dobject.RotationAngles.
+* Rock with lighthouse (but no collision detection yet). A few other floating objects. 
+* As the boat moves, it leaves a wake of floating bubbles. Random bubbles are recycled over time.  
+* The main ectangle of sea surface (30x30) is surrounded by 4 other, less detailled sea surface rectangles.  
+* Large textured TDisk underneath represents the sea horizon.
+* Scrollable listbox contains all app controls: camera, boat, waves and object groups ( click button at top-right to toggle ontrols) 
 * Camera controls: AngleOfView, Azimuth and elevation 
 * Option to design camera. Note that this camera cannot be zoomed or moved.
 * Mouse actions: drag up/down=change elevation, drag rigth/left rotates camera.
@@ -41,7 +42,7 @@ Form in fSailboatDemo.pas is rigged to be controlled externally.  These function
 
     procedure SetBoatState(const aCap,aHeel,aSpeed,aBoomAngle,aRudderAngle,aWindDir,aWindSpeed:Single);  // sets state of boat 
     procedure SetSailShape( ixSail:integer; aPtArray:TPointF_Array );                                    // sets sail surf to a profile
-    procedure set3DcharacterState(ix:integer; const x,y,alfa:Single);   // ix = which char               // sets position and rotation of an animated char
+    procedure set3DcharacterState(ix:integer; const x,y,alfa:Single);   // ix = which char               // sets position/rotation of animated char
     procedure set3dMarks(ix:integer; const ax,ay:Single);                                                // sets mark postion
     
     Procedure setTerrainBitmap(bVisible:boolean; aBMP:TBitmap);  // use a gray shade bitmap to set large scale terrain map                     
@@ -52,14 +53,14 @@ https://github.com/omarreis/GBE3D/releases/tag/V20
 
 ## iOS/Android
 
-App is not available in the stores, but runs ok on iOS and Android.
+App is not available in the phone stores at this time, but runs ok on iOS and Android.
 To run on these devices, you must compile from source.
 
-But you can experiment with this app by using *OPYC* sailing game. OPYC combines the 3D scene with 2D animation using physics (Box2D engine) integrating realtime NOAA GFS winds and high resolution world maps (GSHHG). Available on stores (iOS and Android) search for "OPYC". 
+But you can experiment with this app by using *OPYC* sailing game. OPYC combines this 3D scene with 2D animation using physics (Box2D engine) integrating realtime NOAA GFS winds and high resolution world maps (GSHHG). Available on stores (iOS and Android) search for "OPYC". 
 
-## Video
+## Videos
 
-https://youtu.be/M9_Z5RxW3Pc   SailboatDemo V2 on Youtube (jun22)
+https://youtu.be/M9_Z5RxW3Pc   SailboatDemo V2 on Youtube (jun22) - new!
 
 http://www.youtube.com/watch?v=bBpZxB8GLpg   SailboatDemo V1 on Youtube
 
