@@ -9,7 +9,7 @@ A 3D sailboat on a sea surface with animated waves.
 This demo application was added to this fork of GBE3D 3d components, by Gregory Bersegeay. 
 
 Features:
-* SailboatDemo was expanded fron original GBE3D *waterdemo* sample.
+* SailboatDemo was expanded from original GBE3D *waterdemo* sample.
 * Multi platform ( Windows, iOS and Android ).
 * Original sailboat hull model. Made with Blender ( a collada model embedded ). 
 * Main and jib sails with camber and quadratic leech. Configurable and dynamic sail mesh.
