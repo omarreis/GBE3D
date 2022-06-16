@@ -62,7 +62,11 @@ https://github.com/omarreis/GBE3D/releases/tag/V20
 App is not available in the phone stores at this time, but runs ok on iOS and Android.
 To run on these devices, you must compile from source.
 
-But you can experiment with this app by using *OPYC* sailing game. OPYC combines this 3D scene with 2D animation using physics (Box2D engine) integrating realtime NOAA GFS winds and high resolution world maps (GSHHG). Available on stores (iOS and Android) search for "OPYC". 
+## OPYC game
+
+You can also experiment with this app on iOS/Android phones by using *OPYC* sailing game. OPYC combines this 3D scene with 2D animation using physics (Box2D engine) integrating real world NOAA GFS winds and high resolution world maps (GSHHG). Available on app stores (iOS and Android). Search for "OPYC". 
+
+* OPYC home / Windows download: https://www.tecepe.com.br/nav/opyc
 
 ## Videos
 
