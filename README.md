@@ -8,29 +8,29 @@ In this fork of Firemonkey 3D component suite *GBE3D* by Gregory Bersegeay, I ex
 Original repository is at https://github.com/gbegreg/GBE3D
 
 changes:
-* edited GBEPlaneExtend.pas  
+* edited GBEPlaneExtend.pas - Moved the wave part to a separate object - TWaveSystem - that can be shared by multiple sea surface planes.
 * new components added to GBE3D.dpk: *TWaveSystem*, *TOceanSurface* and *TomSailSurface*.  
 * new files omSailSurface.pas and GBE_Om_OceanWaves.pas 
 * new demo app *SailboatDemo* 
 
-I moved the wave definitions to *TWaveSystem*, a non-visual component. 
-TWaveSystem supports 3 simultaneous sin waves. 
-Each wave has properties Amplitude, Vitesse, Longeur and Origine (a TPoint3d). 
+*TWaveSystem* is a non-visual component. It supports 5 simultaneous senoid waves. 
+Each wave has properties: Amplitude, Vitesse, Longeur and Origine (a TPoint3d). 
 
-*TOceanSurface* is a dynamic rectangular mesh. 
+*TOceanSurface* is a rectangular mesh with points w/ movement in the Z-axis. 
 It has a WaveSystem field. Multiple TOceanSurfaces can share the same TWaveSystem. 
 TOceanSurface initially descended from TGBEPlaneExtend, but I changed to TPlane to be able to separate the wave system,
-and copied the code for TGBEPlaneExtend.
+and copied the code from TGBEPlaneExtend.
 
-*TomSailSurface* is a basic 3d sail mesh object for main and jib sails. 
-It supports sails with a straight side (main,jib,genoa) and simetric sails (spinaker, code 0).
+*TomSailSurface* is a 3d sail mesh object for main and jib sails. 
+It supports sails with a straight side (main,jib,genoa) and more simetric sails (spinaker, code 0).
+Sail surface profile can be set with a 2D polygonal. 
 
 ## SailboatDemo
-Firemonkey 3d demo using ocean and sail surfaces with dynamic meshes. 
+Added a Firemonkey 3d demo to GBE3D/Demos using ocean and sail meshes. 
 
 https://github.com/omarreis/GBE3D/tree/master/demos/SailboatDemo 
 
-Current version was released in jun22, compiled with Delphi 11.1 Alexandria.
+Current version was posted in jun22, compiled with Delphi 11.1 Alexandria.
 
 ![SailboatDemo screenshot](Screenshot2.png)
 
