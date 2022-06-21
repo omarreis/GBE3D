@@ -37,24 +37,29 @@ Note: At this time Github web does not accept files larger than 25MB to be moved
 
 ## Compiling SailboatDemo
 
-In order to compile this demo you have to install the *GBE3D* design package *in this fork*,
-as I have added components sea surface and sail surface.
+In order to compile this demo you have to install GBE3D components:
 
-Tested with Delphi 11.1 on Windows, iOS and Android (jun/22)
+* install the *GBE3D* design package *in this fork* as I have added 2 mesh components: ocean surface and sail surface. 
+Saildemo also uses TGBEHeightmap (for the terrain) and clouds. 
+
+* Tested with Delphi 11.1 on Windows, iOS and Android (jun/22)
 
 ## Rigged boat
 
-Form in fSailboatDemo.pas is rigged to be controlled externally.  These functions allow manipulating the state of the boat for the frame:
+Form in fSailboatDemo.pas is rigged to be controlled externally.  
+These functions allow manipulating the state of the boat for the frame:
 
     procedure SetBoatState(const aCap,aHeel,aSpeed,aBoomAngle,aRudderAngle,aWindDir,aWindSpeed:Single);  // sets state of boat 
-    procedure SetSailShape( ixSail:integer; aPtArray:TPointF_Array );                                    // sets sail surf to a profile
-    procedure set3DcharacterState(ix:integer; const x,y,alfa:Single);   // ix = which char               // sets position/rotation of animated char
-    procedure set3dMarks(ix:integer; const ax,ay:Single);                                                // sets mark postion
+    procedure SetSailShape( ixSail:integer; aPtArray:TPointF_Array );                                    // sets sail surf to a polyline
+    procedure set3DcharacterState(ix:integer; const x,y,alfa:Single);   // ix = which char               // sets position/rotation of animated character
+    procedure set3dMarks(ix:integer; const ax,ay:Single);                                                // sets mark position 
     
-    Procedure setTerrainBitmap(bVisible:boolean; aBMP:TBitmap);  // use a gray shade bitmap to set large scale terrain map                     
+    Procedure setTerrainBitmap(bVisible:boolean; aBMP:TBitmap);  // use a gray shade bitmap to set large scale terrain ( land )                     
 
 
 ## Windows executable
+
+Single file Win32 executable:
 https://github.com/omarreis/GBE3D/releases/tag/V20
 
 ## iOS/Android
