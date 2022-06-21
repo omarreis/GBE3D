@@ -40,7 +40,7 @@ Note: At this time Github web does not accept files larger than 25MB to be moved
 In order to compile this demo you have to install GBE3D components:
 
 * install the *GBE3D* design package *in this fork* as I have added 2 mesh components: ocean surface and sail surface. 
-Saildemo also uses TGBEHeightmap (for the terrain) and clouds. 
+SailboatDemo also uses TGBEHeightmap (for the terrain) and TGBEClouds. 
 
 * Tested with Delphi 11.1 on Windows, iOS and Android (jun/22)
 
