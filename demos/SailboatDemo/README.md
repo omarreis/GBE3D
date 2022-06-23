@@ -65,15 +65,15 @@ They are available in Blender .blend ( original format ) and in .glb (compatible
 
 See *models* folder.
 
-To import 3d models into the scene, used Blender to export models in collada format ( one that works with TModel3D ) and then imported in the Delphi IDE.  
+To import 3d models into the scene, I used Blender to export models to collada format ( one that works with TModel3D ) and then imported in the Delphi IDE.  
 
 ## Windows executable
 
-The fat executable, with all graphic data inside, makes it easier to run the app. 
+The fat executable, with all graphic assets inside, makes it easier to run the app. 
 A single file *SailboatDemo.exe* is needed to run the app.
 
-Single file Win32 executable:
-https://github.com/omarreis/GBE3D/releases/tag/V20
+Single file Win32 executable (v2.0):
+*  https://github.com/omarreis/GBE3D/releases/tag/V20
 
 ## iOS/Android
 
