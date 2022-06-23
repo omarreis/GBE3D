@@ -54,8 +54,14 @@ These functions allow manipulating the state of the boat for the frame:
     procedure set3DcharacterState(ix:integer; const x,y,alfa:Single);   // ix = which char               // sets position/rotation of animated character
     procedure set3dMarks(ix:integer; const ax,ay:Single);                                                // sets mark position 
     
-    Procedure setTerrainBitmap(bVisible:boolean; aBMP:TBitmap);  // use a gray shade bitmap to set large scale terrain ( land )                     
+    Procedure setTerrainBitmap(bVisible:boolean; aBMP:TBitmap);  // use a gray shade bitmap to set large scale terrain ( land )     
+    
+## 3d Models     
 
+Models used in SailboatDemo app are embedded in fSailbopatDemo.fmx file. 
+But they are also available in Blender .blend ( original format )  and in .glb.
+
+See *models* folder.
 
 ## Windows executable
 
