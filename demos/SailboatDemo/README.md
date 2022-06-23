@@ -56,18 +56,21 @@ These functions allow manipulating the state of the boat for the frame:
     
     Procedure setTerrainBitmap(bVisible:boolean; aBMP:TBitmap);  // use a gray shade bitmap to set large scale terrain ( land )     
     
-## 3d Models     
+## 3D models and textures    
 
-Models used in SailboatDemo app are embedded in fSailbopatDemo.fmx file. 
-So they are not needed to build or to deploy the app.
+All models used in SailboatDemo are embedded in fSailbopatDemo.fmx file. 
+So model and texture files are not needed to build or to deploy the app.
 
-But they are also available in Blender .blend ( original format )  and in .glb.
+They are available in Blender .blend ( original format ) and in .glb (compatible with GXScene).
 
 See *models* folder.
 
-I used Blender to export models in collada format ( I found it to work best with TModel3D ) and then imported in the IDE.  
+To import 3d models into the scene, used Blender to export models in collada format ( one that works with TModel3D ) and then imported in the Delphi IDE.  
 
 ## Windows executable
+
+The fat executable, with all graphic data inside, makes it easier to run the app. 
+A single file *SailboatDemo.exe* is needed to run the app.
 
 Single file Win32 executable:
 https://github.com/omarreis/GBE3D/releases/tag/V20
