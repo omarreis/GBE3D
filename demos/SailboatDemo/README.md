@@ -58,10 +58,10 @@ These functions allow manipulating the state of the boat for the frame:
     
 ## 3D models and textures    
 
-All models used in SailboatDemo are embedded in fSailbopatDemo.fmx file. 
+All models used in SailboatDemo are embedded in fSailboatDemo.fmx file. 
 So model and texture files are not needed to build or to deploy the app.
 
-They are available in Blender .blend ( original format ) and in .glb (compatible with GXScene).
+They are available for edition in Blender .blend format  (original) and in .glb (compatible with GXScene).
 
 See *models* folder.
 
@@ -69,8 +69,8 @@ To import 3d models into the scene, I used Blender to export models to collada f
 
 ## Windows executable
 
-The fat executable, with all graphic assets inside, makes it easier to run the app. 
-A single file *SailboatDemo.exe* is needed to run the app.
+The executable with all graphic assets inside makes it easier to install he app. 
+A single file - *SailboatDemo.exe* - is needed to run the app.
 
 Single file Win32 executable (v2.0):
 *  https://github.com/omarreis/GBE3D/releases/tag/V20
