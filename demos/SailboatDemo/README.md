@@ -59,9 +59,13 @@ These functions allow manipulating the state of the boat for the frame:
 ## 3d Models     
 
 Models used in SailboatDemo app are embedded in fSailbopatDemo.fmx file. 
+So they are not needed to build or to deploy the app.
+
 But they are also available in Blender .blend ( original format )  and in .glb.
 
 See *models* folder.
+
+I used Blender to export models in collada format ( I found it to work best with TModel3D ) and then imported in the IDE.  
 
 ## Windows executable
 
