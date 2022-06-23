@@ -8,6 +8,8 @@ They were built with Blender 3.1. Files
 
 Also exported as .glb for GXScene usage.
 
+![models](modelsSailboatDemo.png)
+
 
 
 
