@@ -18,24 +18,23 @@ Features:
 * Ocean surface animated with waves. 
 * Boat and sea surface fixed at the 3D world center at 0,0 (boatcentric universe)   
 * Boat floats on waves and pitches to match directional derivative.
-* Objects parented to OceanSurface float on it and are moved with boatspeed (ex: wake bubbles). 
+* Objects parented to OceanSurface float on it and are moved with boatspeed (ex: boat wake, ships, land... ). 
 * Sea surface implemented with a movable 3d texture. 
 * A system of TDummys allows setting boat's *course*, *heel* and *pitch* independently, avoiding gymbal locks that might have occured by manipulating RotationAngles. Advice for 3d programmers: Never change all 3 dimensions (x,y,z) of a 3Dobject.RotationAngles.
 * Rock with lighthouse (but no collision detection yet). A few other floating objects. 
 * As the boat moves, it leaves a wake of floating bubbles. Random bubbles are recycled over time.  
 * The main rectangle of sea surface (30x30) is surrounded by 4 other, less detailled, sea surface rectangles.  
 * Large textured TDisk underneath represents the sea horizon.
-* Large scale *terrain* object can be set with a grayscale bitmap. 
+* Large scale *terrain* object can be set with a grayscale bitmap ( a TGBEHeightmap ). 
 * Scrollable listbox contains all app controls: camera, boat, waves and object groups ( click button at top-left to toggle controls) 
 * Main camera controls: AngleOfView, Azimuth and elevation. 
-* Option to design camera. Note that design camera cannot be zoomed or moved.
+* Option to design camera. Note that design camera cannot be zoomed or moved ( may look unresponsive )
 * Mouse actions: drag up/down=change elevation, drag rigth/left rotates camera.
-* Boat controls: toggle movement, Course, Speed, Heel, jib and main sheet (sail rotation).
+* Boat controls: toggle movement, Course (or Cap), Speed, Heel, jib and mainsail rotation).
 * Wave system is a sum of 5 senoid waves w/ configurable Amplitude, Longueur, Vitesse and Origine ( same as TGBEPlaneExtend, Om: kept the french names ) 
-* All assets (3d model and textures) embedded in the form file (fSailboatDemo.fmx). That is why the .FMX is so big (25M). 
+* All graphic assets (3d models and textures) are embedded in the form file (fSailboatDemo.fmx). That is why the .FMX is so big (25M). 
  
-Note: At this time Github web does not accept files larger than 25MB to be moved. I had to use git command line to update fSailboatDemo.fmx.
-
+Note: At this time *Github Web* does not accept files larger than 25MB to be moved. I had to use git command line to update fSailboatDemo.fmx.
 
 ## Compiling SailboatDemo
 
@@ -44,7 +43,7 @@ In order to compile this demo you have to install GBE3D components:
 * install the *GBE3D* design package *in this fork* as I have added 2 mesh components: ocean surface and sail surface. 
 SailboatDemo also uses TGBEHeightmap (for the terrain) and TGBEClouds. 
 
-* Tested with Delphi 11.1 on Windows, iOS and Android (jun/22)
+* Status: Tested with Delphi 11.1 on Windows, iOS and Android (jun/22)
 
 ## Rigged boat
 
@@ -61,9 +60,8 @@ These functions allow manipulating the state of the boat for the frame:
 ## 3D models and textures    
 
 All models used in SailboatDemo are embedded in fSailboatDemo.fmx file. 
-So model and texture files are not needed to build or to deploy the app.
-
-They are available for edition in Blender .blend format  (original) and in .glb (compatible with GXScene).
+Model and texture files are not needed to build or deploy the app.
+But they are available for edition in Blender .blend format  (original) and in .glb
 
 See *models* folder.
 
@@ -90,11 +88,12 @@ You can also experiment with this app on iOS/Android phones by using *OPYC* sail
 
 ## Videos
 
-https://youtu.be/M9_Z5RxW3Pc   SailboatDemo V2 on Youtube (jun22) - new!
+* https://youtu.be/M9_Z5RxW3Pc   SailboatDemo V2 on Youtube (jun22) - new!
 
-https://www.tiktok.com/@omar_reis/video/7107767340376329478 - new!
+* https://www.tiktok.com/@omar_reis/video/7107767340376329478 - new!
 
-http://www.youtube.com/watch?v=bBpZxB8GLpg   SailboatDemo V1 on Youtube
+* http://www.youtube.com/watch?v=bBpZxB8GLpg   SailboatDemo V1 on Youtube
+
 
 ![Youtube video](https://img.youtube.com/vi/bBpZxB8GLpg/0.jpg) 
 
