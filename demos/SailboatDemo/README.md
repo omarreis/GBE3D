@@ -37,12 +37,13 @@ Features:
  
 Note: At this time *Github Web* does not accept files larger than 25MB to be moved. I had to use git command line to update fSailboatDemo.fmx.
 
-*Not implemented*
+## Not implemented
 
-Not in this demo app, at this time:
-* 3D Collision detection
-* Wind driven boat ( boat just moves at a speed set in the Speed tabcontrol )
-* Terrain updates as the boat moves
+Not in this demo, at this time:
+
+* no 3D Collision detection ( ship, rock ..)
+* no Wind driven boat ( boat just moves at a speed set in the Speed tabcontrol ). One could add a Polar Chart to calculate boat speed.
+* no Terrain updates as the boat moves.
 
 ## Compiling SailboatDemo
 
