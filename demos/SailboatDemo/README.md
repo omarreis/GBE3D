@@ -37,6 +37,13 @@ Features:
  
 Note: At this time *Github Web* does not accept files larger than 25MB to be moved. I had to use git command line to update fSailboatDemo.fmx.
 
+*Not implemented*
+
+Not in this demo app, at this time:
+* 3D Collision detection
+* Wind driven boat ( boat just moves at a speed set in the Speed tabcontrol )
+* Terrain updates as the boat moves
+
 ## Compiling SailboatDemo
 
 In order to compile this demo you have to install GBE3D components:
