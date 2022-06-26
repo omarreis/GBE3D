@@ -37,6 +37,8 @@ Features:
  
 Note: At this time *Github Web* does not accept files larger than 25MB to be moved. I had to use git command line to update fSailboatDemo.fmx.
 
+![screenshot on phone](SailboatDemo_on_phone.png)
+
 ## Not implemented
 
 Not in this demo, at this time:
