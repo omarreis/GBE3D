@@ -3,11 +3,12 @@
 [![SailboatDemo V2](https://img.youtube.com/vi/M9_Z5RxW3Pc/0.jpg)](https://www.youtube.com/watch?v=M9_Z5RxW3Pc)
 App video on Youtube
 
-Delphi Firemonkey 3D app for Windows, iOS and Android.
+#Delphi #Firemonkey 3D app for Windows, iOS and Android.
 
 A 3D sailboat on a sea surface with animated waves. 
+
 This demo application was added to this fork of GBE3D 3d components, by Gregory Bersegeay. 
-The app has grown with unnecessary functionality and is probably not a good demo anymore. 
+The app has grown with unnecessary functionality and is probably not a good demo anymore, as simplicity goes. 
 Anyway:
 
 Features:
