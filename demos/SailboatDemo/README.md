@@ -82,7 +82,7 @@ To import 3d models into the scene, I used Blender to export models to collada f
 ## Windows executable
 
 The executable with all graphic assets inside makes it easier to run the app. 
-A single file - *SailboatDemo.exe* - is needed to run the app. No instalation required.
+A single file - *SailboatDemo.exe* - is needed. No instalation required.
 The app doesnt save anything to files, uses no cookies and collects no user data.
 
 Single file Win32 executable (v2.0):
@@ -103,7 +103,7 @@ You can also experiment with this app on iOS/Android phones by using *OPYC* sail
 
 * https://youtu.be/M9_Z5RxW3Pc   SailboatDemo V2 on Youtube (jun22) - new!
 
-* https://www.tiktok.com/@omar_reis/video/7107767340376329478 - new!
+* https://www.tiktok.com/@omar_reis/video/7107767340376329478 tiktok of SailboatDemo on phone  new!
 
 * http://www.youtube.com/watch?v=bBpZxB8GLpg   SailboatDemo V1 on Youtube
 
