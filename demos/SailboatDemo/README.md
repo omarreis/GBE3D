@@ -57,7 +57,7 @@ SailboatDemo also uses TGBEHeightmap (for the terrain) and TGBEClouds.
 ## Rigged boat
 
 Form in fSailboatDemo.pas is rigged to be controlled externally.  
-These functions allow manipulating the state of the boat for the frame:
+These functions allow manipulating the state of the boat for the frame at run time:
 
     procedure SetBoatState(const aCap,aHeel,aSpeed,aBoomAngle,aRudderAngle,aWindDir,aWindSpeed:Single);  // sets state of boat 
     procedure SetSailShape( ixSail:integer; aPtArray:TPointF_Array );                                    // sets sail surf to a polyline
