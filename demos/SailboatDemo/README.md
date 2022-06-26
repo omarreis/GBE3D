@@ -42,7 +42,7 @@ Note: At this time *Github Web* does not accept files larger than 25MB to be mov
 Not in this demo, at this time:
 
 * no 3D Collision detection ( ship, rock ..)
-* no Wind driven boat ( boat just moves at a speed set in the Speed tabcontrol ). One could add a Polar Chart to calculate boat speed.
+* no Wind driven boat ( boat just moves at a speed set in the Speed tabcontrol ). One could add a boat wind x speed chart ( polars ) to calculate boat speed.
 * no Terrain updates as the boat moves.
 
 ## Compiling SailboatDemo
