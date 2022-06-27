@@ -34,9 +34,9 @@ Features:
 * Mouse actions: drag up/down=change elevation, drag rigth/left rotates camera.
 * Boat controls: toggle movement, Course (or Cap), Speed, Heel, jib and mainsail rotation).
 * Wave system is a sum of 5 senoid waves w/ configurable Amplitude, Longueur, Vitesse and Origine ( same as TGBEPlaneExtend, Om: kept the french names ) 
-* All graphic assets (3d models and textures) are embedded in the form file (fSailboatDemo.fmx). That is why the .FMX is so big (25M). 
+* All graphic assets (3d models and textures) are embedded in the form file (fSailboatDemo.fmx). That is why the .fmx is so big (25M). 
  
-Note: At this time *Github Web* does not accept files larger than 25MB to be moved. I had to use git command line to update fSailboatDemo.fmx.
+Note: At this time *Github Web* does not accept files larger than 25MB to be posted. Had to use git command line to update *fSailboatDemo.fmx*.
 
 ![screenshot on phone](SailboatDemo_on_phone.png)
 
