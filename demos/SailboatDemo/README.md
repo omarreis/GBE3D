@@ -87,10 +87,14 @@ To import 3d models into the scene, I used Blender to export models to collada f
 
 The executable with all graphic assets inside makes it easier to run the app. 
 A single file - *SailboatDemo.exe* - is needed. No instalation required.
-The app doesnt save anything to files, uses no cookies and collects no user data.
 
 Single file Win32 executable (v2.0):
 *  https://github.com/omarreis/GBE3D/releases/tag/V20
+
+## Privacy
+
+This demo doesn't save data to files, uses no cookies and collects no user data.
+Session state is not persistent.
 
 ## iOS/Android
 
