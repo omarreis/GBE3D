@@ -32,8 +32,8 @@ Features:
 * Scrollable listbox contains all app controls: camera, boat, waves and object groups ( click button at top-left to toggle controls) 
 * Main camera controls: AngleOfView, Azimuth and elevation. 
 * Option to design camera. Note that design camera cannot be zoomed or moved ( may look unresponsive )
-* Mouse actions: drag up/down=change elevation, drag rigth/left rotates camera.
-* Boat controls: toggle movement, Course (or Cap), Speed, Heel, jib and mainsail rotation).
+* Mouse actions: vertical drag changes elevation, horizontal drag rotates camera.
+* Boat controls: toggle movement, Course (or Cap), Speed, Heel, jib and mainsail rotation.
 * Wave system is a sum of 5 senoid waves w/ configurable Amplitude, Longueur, Vitesse and Origine ( same as TGBEPlaneExtend, Om: kept the french names ) 
 * All graphic assets (3d models and textures) are embedded in the form file (fSailboatDemo.fmx). That is why the .fmx is so big (25M). 
  
