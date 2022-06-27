@@ -23,9 +23,10 @@ Features:
 * Sea surface implemented with a movable 3d texture. 
 * A system of TDummys allows setting boat's *course*, *heel* and *pitch* independently, avoiding gymbal locks that might follow of manipulating .RotationAngle ( Never change all 3 dimensions (x,y,z) of a 3D_Object.RotationAngle ).
 * Rock with lighthouse (but no collision detection yet). The rock doesn't float but it is moved by the OceanSurface.
-* Other floating objects are also parented to OceanSurface: ship, container, barrel, man on lifebuoy, pelycan ...
-* Wild life: dolphin, whale .
-* As the boat moves, it leaves a wake of floating bubbles (circles). Random bubbles are recycled over time.  
+* Other floating objects are also parented to OceanSurface: ship, container, barrel, man on lifebuoy ...
+* Wild life: dolphin, whale, pelycan.
+* Clouds in the sky ( TGBEClouds )
+* As the boat moves, it leaves a wake of floating bubbles (circles). Bubbles are recycled over time.  
 * The main rectangle of sea surface (30x30) is surrounded by 4 other, less detailled, ocean surface rectangles.  
 * Large textured TDisk underneath represents the sea horizon.
 * Large scale *terrain* object can be set with a grayscale bitmap ( a TGBEHeightmap ). 
