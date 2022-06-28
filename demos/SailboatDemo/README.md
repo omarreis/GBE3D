@@ -24,6 +24,7 @@ Features:
 * Rock with lighthouse (but no collision detection yet). The rock doesn't float but it is moved by the OceanSurface.
 * Other floating objects are also parented to OceanSurface: ship, container, barrel, man on lifebuoy ...
 * Animated wild life: dolphin, whale, pelycan.
+* A set of marks is available for regatta gates.
 * Clouds in the sky ( TGBEClouds )
 * As the boat moves, it leaves a wake of floating bubbles (circles). Bubbles are recycled over time.  
 * The main rectangle of sea surface (30x30) is surrounded by 4 other, less detailled, ocean surface rectangles.  
