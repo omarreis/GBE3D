@@ -5,10 +5,10 @@ App video on Youtube
 
 #Delphi #Firemonkey 3D app for Windows, iOS and Android.
 
-A 3D sailboat on a sea surface with animated waves. 
+A 3D scene with the sailboat over animated ocean surface.  
 
 This demo application was added to this fork of GBE3D 3d components, by Gregory Bersegeay. 
-The app has grown with unnecessary functionality and is probably not a good demo anymore, as simplicity goes. 
+The app has grown with unnecessary functionality. Not a simple demo... 
 Anyway:
 
 Features:
