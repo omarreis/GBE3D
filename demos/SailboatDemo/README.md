@@ -113,6 +113,8 @@ You can also experiment with this app on iOS/Android phones by using *OPYC* sail
 
 * OPYC home / Windows download: https://www.tecepe.com.br/nav/opyc
 
+*OPYC game requires user registration*
+
 ## Videos
 
 * https://youtu.be/M9_Z5RxW3Pc   SailboatDemo V2 on Youtube (jun22) - new!
