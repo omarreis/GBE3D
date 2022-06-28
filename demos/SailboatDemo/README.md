@@ -45,7 +45,7 @@ Note: At this time *Github Web* does not accept files larger than 25MB to be pos
 
 SailboatDemo 3d machinery: Every 3d object is parented to a TDummy (see image below). The dummys are used to position objects at run time. The position of actual objects is set at design time, in relation to its dummy. This allows fine adjustment of object positions. 
 
-Also helps with objects doing cyclic movements. As an example, dummyDolphin is parented to the OceanSurface, so it floats. The Dolphin model itself is moved up and down (senoid function) to jump out of the ocean.
+Also helps with objects doing cyclic movements. As an example, dummyDolphin is parented to the OceanSurface, so it floats. The Dolphin model itself is moved up and down (Position.z) with a senoid function to jump out of the ocean.
 
 ![viewport hierarchy](SailboatDemo_obj_hierarchy.png)
 
