@@ -87,7 +87,7 @@ See *models* folder.
 
 https://github.com/omarreis/GBE3D/tree/master/demos/SailboatDemo/models
 
-To import 3d models into the scene, I used Blender to export models to collada format ( one that works with TModel3D ) and then imported in the Delphi IDE.  
+To import modified 3d models into the scene, I used Blender to export models to collada format ( one that works with TModel3D ) and then imported the TModel3D in the Delphi IDE.  
 
 ## Windows executable
 
