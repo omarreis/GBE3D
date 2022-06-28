@@ -109,11 +109,11 @@ To run on these devices, you must compile from source.
 
 ## OPYC game
 
-You can also experiment with this app on iOS/Android phones by using *OPYC* sailing game. OPYC combines this 3D scene with 2D animation using physics (Box2D engine) integrating real world NOAA GFS winds and high resolution world maps (GSHHG). Available on app stores (iOS and Android). Search for "OPYC". 
+You can also experiment with this code on iOS/Android phones by using *OPYC* sailing game. OPYC combines this 3D scene with 2D animation using Box2D physicsm, integrating real world NOAA GFS winds and high resolution world maps GSHHG. OPYC is available on app stores (iOS and Android). Search for "OPYC". 
 
 * OPYC home / Windows download: https://www.tecepe.com.br/nav/opyc
 
-*OPYC game requires user registration*
+*OPYC game requires user registration* 
 
 ## Videos
 
