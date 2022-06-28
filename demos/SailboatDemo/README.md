@@ -26,6 +26,7 @@ Features:
 * Animated wild life: dolphin, whale, pelycan.
 * A set of marks is available for regatta gates.
 * Clouds in the sky ( TGBEClouds )
+* Cardinal points indicated on the horizon ( "N", "S", "E", "W" )
 * As the boat moves, it leaves a wake of floating bubbles (circles). Bubbles are recycled over time.  
 * The main rectangle of sea surface (30x30) is surrounded by 4 other, less detailled, ocean surface rectangles.  
 * Large textured TDisk underneath represents the sea horizon.
