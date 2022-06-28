@@ -29,7 +29,7 @@ Features:
 * As the boat moves, it leaves a wake of floating bubbles (circles). Bubbles are recycled over time.  
 * The main rectangle of sea surface (30x30) is surrounded by 4 other, less detailled, ocean surface rectangles.  
 * Large textured TDisk underneath represents the sea horizon.
-* Large scale *terrain* object can be set with a grayscale bitmap ( a TGBEHeightmap ). 
+* Large scale *terrain* object (land) can be set with a grayscale bitmap ( a TGBEHeightmap ). 
 * Scrollable listbox contains all app controls: camera, boat, waves and object groups ( click button at top-left to toggle controls) 
 * Main camera controls: AngleOfView, Azimuth and elevation. 
 * Option to design camera. Note that design camera cannot be zoomed or moved ( may look unresponsive )
