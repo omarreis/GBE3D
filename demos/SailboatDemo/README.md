@@ -14,7 +14,7 @@ Anyway:
 Features:
 * SailboatDemo was expanded from original GBE3D *waterdemo* sample.
 * Multi platform ( Windows, iOS and Android ).
-* Original 3d models built with Blender (boat,ship,dolphin, whale). See */models* 
+* Original 3d models built with Blender (boat, ship, dolphin, whale). See */models* 
 * Main and jib sail surfaces with quadratic camber. Configurable and dynamic sail mesh.
 * Ocean surface animated with waves and moving texture. 
 * Boat and ocean surface fixed to the 3D world center at 0,0 (boatcentric universe)   
