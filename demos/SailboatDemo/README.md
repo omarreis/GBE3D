@@ -43,7 +43,7 @@ Note: At this time *Github Web* does not accept files larger than 25MB to be pos
 
 ## Viewport object Hierarchy
 
-SailboatDemo 3d scene: Every 3d object is parented to a TDummy (see image below). The dummys are used to position objects at run time. The position of actual objects is set at design time, in relation to its dummy. This allows fine adjustment of object positions. Also helps with objects doing cyclic movements. 
+SailboatDemo 3d machinery: Every 3d object is parented to a TDummy (see image below). The dummys are used to position objects at run time. The position of actual objects is set at design time, in relation to its dummy. This allows fine adjustment of object positions. Also helps with objects doing cyclic movements. 
 
 ![viewport hierarchy](SailboatDemo_obj_hierarchy.png)
 
