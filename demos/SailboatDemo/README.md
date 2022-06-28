@@ -42,6 +42,9 @@ Note: At this time *Github Web* does not accept files larger than 25MB to be pos
 
 ![screenshot on phone](SailboatDemo_on_phone.png)
 
+![screenshot on phone](SailboatDemo_obj_hierarchy)
+Viewport hierarchy
+
 ## Not included
 
 Not implemented at this time:
