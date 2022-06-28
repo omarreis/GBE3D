@@ -14,14 +14,13 @@ Anyway:
 Features:
 * SailboatDemo was expanded from original GBE3D *waterdemo* sample.
 * Multi platform ( Windows, iOS and Android ).
-* Original sailboat hull model. Made with Blender ( a collada model embedded ). 
-* Main and jib sails with camber and quadratic leech. Configurable and dynamic sail mesh.
-* Ocean surface animated with waves. 
-* Boat and sea surface fixed at the 3D world center at 0,0 (boatcentric universe)   
+* Original 3d models built with Blender (boat,ship,dolphin, whale). See */models* 
+* Main and jib sail surfaces with quadratic camber. Configurable and dynamic sail mesh.
+* Ocean surface animated with waves and moving texture. 
+* Boat and ocean surface fixed to the 3D world center at 0,0 (boatcentric universe)   
 * Boat floats on waves and pitches to match directional derivative.
 * Objects parented to OceanSurface float on it and are moved with boatspeed (ex: boat wake, ships, land... ). 
-* Sea surface implemented with a movable 3d texture. 
-* A system of TDummys allows setting boat's *course*, *heel* and *pitch* independently, avoiding gymbal locks that might follow of manipulating .RotationAngle ( Never change all 3 dimensions (x,y,z) of a 3D_Object.RotationAngle ).
+* A system of TDummys allows setting boat's *course*, *heel* and *pitch* independently, avoiding gymbal locks that might follow of manipulating .RotationAngle ( Never change all 3 dimensions (x,y,z) of a 3D_Object.RotationAngle ). See hierarchy image below.
 * Rock with lighthouse (but no collision detection yet). The rock doesn't float but it is moved by the OceanSurface.
 * Other floating objects are also parented to OceanSurface: ship, container, barrel, man on lifebuoy ...
 * Wild life: dolphin, whale, pelycan.
