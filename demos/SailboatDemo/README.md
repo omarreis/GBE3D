@@ -15,9 +15,10 @@ Features:
 * SailboatDemo was expanded from original GBE3D *waterdemo* sample.
 * Multi platform ( Windows, iOS and Android ).
 * Original 3d models built with Blender (boat, ship, dolphin, whale). See */models* 
-* Main and jib sail surfaces with quadratic camber. Configurable and dynamic sail mesh.
-* Ocean surface animated with waves and moving texture. 
-* Boat and ocean surface fixed to the 3D world center at 0,0 (boatcentric universe)   
+* Main and jib sail surfaces with quadratic camber. Configurable and dynamic sail mesh: object TSailSurface.
+* Wind direction Arrow animated (sin function): object TWindArrow. 
+* Ocean surface animated with waves and moving texture. object TOceanSurface. 
+* Boat and ocean surfaces fixed to the 3D world center at 0,0 (boatcentric universe)   
 * Boat floats on waves and pitches to match directional derivative.
 * Objects parented to OceanSurface float on it and are moved with boatspeed (ex: boat wake, ships, land... ). 
 * A system of TDummys allows setting boat's *course*, *heel* and *pitch* independently, avoiding gymbal locks that might follow of manipulating .RotationAngle ( Never change all 3 dimensions (x,y,z) of a 3D_Object.RotationAngle ). See hierarchy image below.
