@@ -64,8 +64,8 @@ Not implemented at this time:
 
 In order to compile this demo you have to install GBE3D components:
 
-* install the *GBE3D* design package *in this fork* as I have added 2 mesh components: ocean surface and sail surface. 
-SailboatDemo also uses TGBEHeightmap (for the terrain) and TGBEClouds. 
+* install the *GBE3D* design package *in this fork* as I have added 3 mesh components: TOceanSurface, TSailSurface and TWindArrow. 
+SailboatDemo also uses TGBEHeightmap for the terrain and TGBEClouds. 
 
 * Status: Tested with Delphi 11.1 on Windows, iOS and Android (jun/22)
 
