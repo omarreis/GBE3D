@@ -14,13 +14,13 @@ The SailboatDemo rigged boat scene can be used in sailing games and simulations.
 Features:
 * Multi platform ( Windows, iOS and Android using Firemonkey 3D ).
 * Original 3d models built with Blender (boat, ship, dolphin, whale). See */models* 
-* Main and jib sail surfaces with curved surfaces. Configurable and dynamic sail mesh: object TSailSurface.
-* Wind Arrow animated: object TWindArrow. 
+* Main and bow sails with curved surfaces. Configurable and dynamic sail mesh: object TSailSurface.
+* animated Wind Arrow: object TWindArrow. 
 * Ocean surface animated with waves and moving texture. object TOceanSurface. 
-* Boat and ocean surface fixed to the 3D world center at 0,0 (boatcentric universe)   
-* Boat floats on waves and pitches to match wave direction.
+* Boat and ocean surface fixed to the 3D world center 0,0 (boatcentric universe).   
+* Boat floats on waves and pitches to match wave inclination.
 * Objects parented to OceanSurface float on it and are moved with boatspeed (ex: boat wake bubbles, ship, land... ). 
-* A system of TDummys allows setting boat's *course*, *heel* and *pitch* independently, avoiding gymbal locks that might follow of manipulating .RotationAngle ( Never change all 3 dimensions (x,y,z) of a 3D_Object.RotationAngle ). See hierarchy image below.
+* A system of TDummys allows setting boat's *course*, *heel* and *pitch* independently, avoiding gymbal locks ( Never change all 3 dimensions (x,y,z) of a 3D Object.RotationAngle ). See hierarchy image below.
 * Rock with lighthouse (but no collision detection). Terrain and rocks don't float but are moved by the OceanSurface.
 * Animated wild life: dolphin, whale, pelycan. 
 * A set of marks is available for regatta gates.
