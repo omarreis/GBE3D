@@ -7,24 +7,22 @@ App video on Youtube
 
 A 3D scene with the sailboat over animated ocean surface.  
 
-This demo application was added to this fork of GBE3D 3d components, by Gregory Bersegeay. 
-The app has grown with unnecessary functionality. Not a simple demo... 
-Anyway:
+This GBE3D demo application was added to this fork of GBE3D 3d components, by Gregory Bersegeay. 
+SailboatDemo was expanded from *waterdemo* sample. 
+The SailboatDemo rigged boat scene can be used in sailing games and simulations.
 
 Features:
-* SailboatDemo was expanded from original GBE3D *waterdemo* sample.
-* Multi platform ( Windows, iOS and Android ).
+* Multi platform ( Windows, iOS and Android using Firemonkey 3D ).
 * Original 3d models built with Blender (boat, ship, dolphin, whale). See */models* 
-* Main and jib sail surfaces with quadratic camber. Configurable and dynamic sail mesh: object TSailSurface.
-* Wind direction Arrow animated (sin function): object TWindArrow. 
+* Main and jib sail surfaces with curved surfaces. Configurable and dynamic sail mesh: object TSailSurface.
+* Wind Arrow animated: object TWindArrow. 
 * Ocean surface animated with waves and moving texture. object TOceanSurface. 
-* Boat and ocean surfaces fixed to the 3D world center at 0,0 (boatcentric universe)   
-* Boat floats on waves and pitches to match directional derivative.
-* Objects parented to OceanSurface float on it and are moved with boatspeed (ex: boat wake, ships, land... ). 
+* Boat and ocean surface fixed to the 3D world center at 0,0 (boatcentric universe)   
+* Boat floats on waves and pitches to match wave direction.
+* Objects parented to OceanSurface float on it and are moved with boatspeed (ex: boat wake bubbles, ship, land... ). 
 * A system of TDummys allows setting boat's *course*, *heel* and *pitch* independently, avoiding gymbal locks that might follow of manipulating .RotationAngle ( Never change all 3 dimensions (x,y,z) of a 3D_Object.RotationAngle ). See hierarchy image below.
-* Rock with lighthouse (but no collision detection yet). The rock doesn't float but it is moved by the OceanSurface.
-* Other floating objects are also parented to OceanSurface: ship, container, barrel, man on lifebuoy ...
-* Animated wild life: dolphin, whale, pelycan.
+* Rock with lighthouse (but no collision detection). Terrain and rocks don't float but are moved by the OceanSurface.
+* Animated wild life: dolphin, whale, pelycan. 
 * A set of marks is available for regatta gates.
 * Clouds in the sky ( TGBEClouds )
 * Cardinal points indicated on the horizon ( "N", "S", "E", "W" )
