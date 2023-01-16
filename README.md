@@ -2,30 +2,34 @@
 # GBE3D
 Suite de composants 3D pour Delphi Firemonkey
 
-## In this fork by oMAR
-In this fork of Firemonkey 3D component suite *GBE3D* by Gregory Bersegeay, I extended TGBEPlaneExtend to enable my SailboatDemo ( a sailboat model with adjustable sails, a wave system and a sea surface with floating objects ).
+## In this fork
 
-Original repository is at https://github.com/gbegreg/GBE3D
+In this fork of FMX 3D component suite *GBE3D* by Gregory Bersegeay, TGBEPlaneExtend was extentded to enable the SailboatDemo.
+It features a sailboat 3d model with adjustable sails, a dynamic sea surface with floating objects.
 
-changes:
+Original repository is at https://github.com/gbegreg/GBE3D  ( Visit it and give it a star! )
+
+changes in this fork:
 * edited GBEPlaneExtend.pas - Moved the wave part to a separate object - TWaveSystem - that can be shared by multiple sea surface planes.
-* new components added to GBE3D.dpk: *TWaveSystem*, *TOceanSurface* and *TomSailSurface*.  
+* new components added to GBE3D design package: *TWaveSystem*, *TOceanSurface* and *TomSailSurface*.  
 * new files omSailSurface.pas and GBE_Om_OceanWaves.pas 
 * new demo app *SailboatDemo* 
 
-*TWaveSystem* is a non-visual component. It supports 5 simultaneous senoid waves. 
-Each wave has properties: Amplitude, Vitesse, Longeur and Origine (a TPoint3d). 
+*TWaveSystem* is a non-visual component. It uses 5 overlapping senoid waves to
+animate the surface points. Each wave has properties: Amplitude, Vitesse, Longeur and Origine (a TPoint3d). 
+WaveSystem returns the z coodinate, given a (x,y).
 
-*TOceanSurface* is a rectangular mesh with points w/ movement in the Z-axis. 
+*TOceanSurface* is a dynamic rectangular surface with points w/ movement in the Z-axis (vertical). 
 It has a WaveSystem field. Multiple TOceanSurfaces can share the same TWaveSystem. 
-TOceanSurface initially descended from TGBEPlaneExtend, but I changed to TPlane to be able to separate the wave system,
-and copied the code from TGBEPlaneExtend.
+TOceanSurface initially descended from TGBEPlaneExtend, but I changed to TPlane to be able to separate the wave system.
+Some code copied from TGBEPlaneExtend.
 
 *TomSailSurface* is a 3d sail mesh object for main and jib sails. 
 It supports sails with a straight side (main,jib,genoa) and more simetric sails (spinaker, code 0).
 Sail surface profile can be set with a 2D polygonal. 
 
 ## SailboatDemo
+
 Added a Firemonkey 3d demo to GBE3D/Demos using ocean and sail meshes. 
 
 https://github.com/omarreis/GBE3D/tree/master/demos/SailboatDemo 
