@@ -5,9 +5,12 @@ App video on Youtube
 
 #Delphi #Firemonkey 3D app for Windows, iOS and Android.
 
-A 3D scene with the sailboat over animated ocean surface.  
+This app features a 3D scene with a rigged sailboat over animated ocean surface.  
 
 This GBE3D demo application was added to this fork of GBE3D 3d components, by Gregory Bersegeay. 
+
+    https://github.com/gbegreg/GBE3D   ( visit and give it a star ! )
+
 SailboatDemo was expanded from *waterdemo* sample. 
 The SailboatDemo rigged boat scene can be used in sailing games and simulations.
 
